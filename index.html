@@ -8,7 +8,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Персики">
 <meta name="theme-color" content="#1a0828">
-<meta name="description" content="Казино с котиками-персиками">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -16,29 +15,18 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html, body {
-    height: 100%;
-    height: 100dvh;
-    overflow: hidden;
+    height: 100%; height: 100dvh; overflow: hidden;
     font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
-    user-select: none;
-    -webkit-user-select: none;
-    color: #fff;
-    background: #0a0a1a;
-    overscroll-behavior: none;
-    touch-action: manipulation;
+    user-select: none; -webkit-user-select: none; color: #fff;
+    background: #0a0a1a; overscroll-behavior: none; touch-action: manipulation;
   }
   #game {
-    position: relative;
-    width: 100%;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
+    position: relative; width: 100%; height: 100dvh;
+    display: flex; flex-direction: column;
     background: radial-gradient(ellipse at 50% 0%, #4a2a6a 0%, #2a1240 40%, #150826 100%);
   }
   #game::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background-image:
       radial-gradient(2px 2px at 20% 30%, #fff8, transparent),
       radial-gradient(1px 1px at 70% 15%, #fff6, transparent),
@@ -47,8 +35,7 @@
       radial-gradient(2px 2px at 15% 80%, #fff4, transparent),
       radial-gradient(1px 1px at 55% 85%, #fff6, transparent),
       radial-gradient(1.5px 1.5px at 90% 75%, #fff5, transparent);
-    pointer-events: none;
-    animation: twinkle 4s ease-in-out infinite alternate;
+    pointer-events: none; animation: twinkle 4s ease-in-out infinite alternate;
   }
   @keyframes twinkle { from { opacity: 0.6; } to { opacity: 1; } }
 
@@ -62,8 +49,7 @@
   }
   .stat {
     background: linear-gradient(180deg, #4a2558, #2d1338);
-    padding: 5px 10px; border-radius: 20px;
-    border: 2px solid #6a3a7a;
+    padding: 5px 10px; border-radius: 20px; border: 2px solid #6a3a7a;
     box-shadow: inset 0 1px 0 #ffffff22, 0 2px 6px #0008;
     font-size: 12px; display: flex; align-items: center; gap: 4px; font-weight: bold;
   }
@@ -93,12 +79,10 @@
     position: relative; cursor: pointer;
     transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     filter: drop-shadow(0 10px 15px #000a);
-    animation: idle 3s ease-in-out infinite;
-    touch-action: manipulation;
+    animation: idle 3s ease-in-out infinite; touch-action: manipulation;
   }
   @keyframes idle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+    0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); }
   }
   .char:active { transform: translateY(-8px) scale(1.05); }
   .char.selected { animation: selected 0.6s ease-in-out infinite alternate; }
@@ -123,7 +107,7 @@
   .star svg { width: 100%; height: 100%; display: block; }
   .r1 .star { color: #9aa; } .r2 .star { color: #5fd; }
   .r3 .star { color: #5af; } .r4 .star { color: #c5f; }
-  .r5 .star { color: #fa3; }
+  .r5 .star { color: #fa3; } .r6 .star { color: #ff69d8; }
   .hpbar {
     position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
     width: 80px; height: 7px; background: #200; border: 2px solid #000;
@@ -159,7 +143,6 @@
     padding-bottom: calc(8px + env(safe-area-inset-bottom));
     gap: 6px; z-index: 5; max-height: 48vh;
   }
-
   #inventoryBar {
     display: flex; gap: 6px; overflow-x: auto; padding: 4px 2px; min-height: 54px;
     -webkit-overflow-scrolling: touch;
@@ -200,7 +183,6 @@
   .slot svg { width: 46px; height: 46px; filter: drop-shadow(0 0 8px currentColor); }
   .slot.win { background: radial-gradient(circle, #2a6a3a33, transparent); color: #7fff7f; }
   .slot.lose { background: radial-gradient(circle, #6a2a2a33, transparent); color: #ff7f7f; }
-
   #pointer {
     position: absolute; top: -4px; bottom: -4px; left: 50%; width: 5px;
     margin-left: -2.5px;
@@ -215,19 +197,18 @@
   #pointer::before { top: -11px; border-top-color: #ffd76e; filter: drop-shadow(0 0 8px #ffd76e); }
   #pointer::after { bottom: -11px; border-bottom-color: #ffd76e; filter: drop-shadow(0 0 8px #ffd76e); }
 
-  #controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  #controls { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
   .btn {
     position: relative;
     background: linear-gradient(180deg, #ff9ecc, #d05090);
     color: #2a0820; border: 2px solid #ffd0e8;
-    padding: 9px 6px; border-radius: 10px;
-    font-weight: 900; cursor: pointer; font-size: 11px;
+    padding: 8px 4px; border-radius: 10px;
+    font-weight: 900; cursor: pointer; font-size: 10px;
     letter-spacing: 0.3px; text-transform: uppercase;
     transition: 0.1s;
     box-shadow: 0 3px 0 #7a2050, 0 5px 12px #0008, inset 0 1px 0 #ffffff88;
     text-shadow: 0 1px 0 #ffffff66;
-    touch-action: manipulation;
-    white-space: nowrap; overflow: hidden;
+    touch-action: manipulation; white-space: nowrap; overflow: hidden;
   }
   .btn:active:not(:disabled) {
     transform: translateY(2px);
@@ -246,7 +227,7 @@
   .btn.gold {
     background: linear-gradient(180deg, #ffe57a, #d0a020); color: #402000;
     box-shadow: 0 3px 0 #705010, 0 5px 12px #0008, inset 0 1px 0 #ffffffaa;
-    grid-column: span 3; font-size: 14px; padding: 11px 6px;
+    grid-column: span 4; font-size: 14px; padding: 10px 6px;
     animation: spinBtn 2s ease-in-out infinite alternate;
   }
   @keyframes spinBtn {
@@ -254,17 +235,29 @@
     to { box-shadow: 0 3px 0 #705010, 0 5px 12px #0008, 0 0 30px #ffe57aaa; }
   }
   .btn.gold:active:not(:disabled) {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 #705010;
+    transform: translateY(2px); box-shadow: 0 1px 0 #705010;
   }
+  .btn.shop {
+    background: linear-gradient(180deg, #c890ff, #7a40c0); color: #1a0030;
+    box-shadow: 0 3px 0 #4a2080, 0 5px 12px #0008, inset 0 1px 0 #ffffff88;
+  }
+  .btn.shop:active:not(:disabled) { box-shadow: 0 1px 0 #4a2080; }
+  .btn.pvp {
+    background: linear-gradient(180deg, #ff9090, #c03030); color: #fff;
+    box-shadow: 0 3px 0 #601010, 0 5px 12px #0008, inset 0 1px 0 #ffffff88;
+  }
+  .btn.pvp:active:not(:disabled) { box-shadow: 0 1px 0 #601010; }
+  .btn.settings {
+    background: linear-gradient(180deg, #b0b0b0, #606060); color: #fff;
+    box-shadow: 0 3px 0 #303030, 0 5px 12px #0008, inset 0 1px 0 #ffffff88;
+  }
+  .btn.settings:active:not(:disabled) { box-shadow: 0 1px 0 #303030; }
 
   #log {
     background: #05020a; border-radius: 8px; padding: 6px 10px;
     font-size: 11px; height: 46px; overflow-y: auto;
-    border: 2px solid #3a1a4a;
-    box-shadow: inset 0 2px 10px #000;
-    font-family: 'Consolas', monospace;
-    -webkit-overflow-scrolling: touch;
+    border: 2px solid #3a1a4a; box-shadow: inset 0 2px 10px #000;
+    font-family: 'Consolas', monospace; -webkit-overflow-scrolling: touch;
   }
   #log div { margin-bottom: 1px; line-height: 1.3; }
   #log::-webkit-scrollbar { width: 4px; }
@@ -272,6 +265,8 @@
   .win { color: #7fff7f; text-shadow: 0 0 6px #7fff7f66; }
   .lose { color: #ff7f7f; }
   .boss { color: #ffd76e; font-weight: bold; text-shadow: 0 0 8px #ffd76e66; }
+  .epic { color: #ff69d8; font-weight: bold; text-shadow: 0 0 8px #ff69d888; }
+  .ach { color: #ffd76e; font-weight: bold; text-shadow: 0 0 8px #ffd76e88; }
 
   .modal {
     position: fixed; inset: 0;
@@ -323,9 +318,74 @@
   .mix-card svg { width: 52px; height: 52px; display: block; margin: 0 auto; }
   .mix-card .n { font-size: 10px; font-weight: bold; margin-top: 2px; color: #ffd0e8; }
   .mix-card .s { font-size: 9px; color: #ffd76e; margin-top: 1px; }
-
   .row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
   .row .btn { flex: 1; min-width: 90px; }
+
+  .shop-item {
+    background: linear-gradient(180deg, #3a2048, #1e0e28);
+    border: 2px solid #6a3a7a; border-radius: 12px;
+    padding: 12px; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .shop-item .icon {
+    width: 56px; height: 56px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle, #ffb0d0 0%, #d06090 100%);
+    border-radius: 12px; border: 2px solid #ffd0e8;
+    font-size: 30px;
+    box-shadow: inset 0 2px 6px #ffffff44, 0 3px 8px #0008;
+  }
+  .shop-item .icon.rare { background: radial-gradient(circle, #a8d8ff 0%, #3060c0 100%); border-color: #b0e0ff; }
+  .shop-item .icon.myth { background: radial-gradient(circle, #e0b0ff 0%, #7030c0 100%); border-color: #e0c0ff; }
+  .shop-item .info { flex: 1; }
+  .shop-item .info h3 { font-size: 14px; color: #ffd76e; margin-bottom: 2px; }
+  .shop-item .info p { font-size: 11px; color: #ccc; margin-bottom: 6px; }
+  .shop-item .info .chance { font-size: 10px; color: #8f8; }
+  .shop-item .buy {
+    flex-shrink: 0;
+    background: linear-gradient(180deg, #ffe57a, #d0a020);
+    color: #402000; border: 2px solid #fff5c0;
+    padding: 8px 14px; border-radius: 10px;
+    font-weight: 900; font-size: 12px;
+    box-shadow: 0 3px 0 #705010, 0 4px 10px #0008;
+    cursor: pointer; touch-action: manipulation;
+    white-space: nowrap;
+  }
+  .shop-item .buy:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 #705010; }
+  .shop-item .buy:disabled {
+    background: linear-gradient(180deg, #555, #333); color: #888;
+    box-shadow: 0 3px 0 #111; border-color: #666; cursor: not-allowed;
+  }
+
+  .up-card {
+    background: linear-gradient(180deg, #3a2048, #1e0e28);
+    border: 2px solid #6a3a7a; border-radius: 12px;
+    padding: 12px; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .up-card svg { width: 64px; height: 64px; flex-shrink: 0; }
+  .up-card .info { flex: 1; min-width: 0; }
+  .up-card .info h3 { font-size: 13px; color: #ffd76e; margin-bottom: 4px; }
+  .up-card .stats { font-size: 11px; color: #ccc; line-height: 1.5; }
+  .up-card .stats b { color: #fff; }
+  .up-card .actions { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+  .up-btn {
+    background: linear-gradient(180deg, #ffe57a, #d0a020);
+    color: #402000; border: 2px solid #fff5c0;
+    padding: 5px 10px; border-radius: 8px;
+    font-weight: 900; font-size: 10px;
+    box-shadow: 0 2px 0 #705010;
+    cursor: pointer; touch-action: manipulation;
+    white-space: nowrap;
+  }
+  .up-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 0 0 #705010; }
+  .up-btn:disabled {
+    background: linear-gradient(180deg, #555, #333); color: #888;
+    box-shadow: 0 2px 0 #111; border-color: #666; cursor: not-allowed;
+  }
+  .up-btn.p { background: linear-gradient(180deg, #ff9999, #c04040); color: #fff; box-shadow: 0 2px 0 #601818; }
+  .up-btn.r { background: linear-gradient(180deg, #99d0ff, #3060c0); color: #fff; box-shadow: 0 2px 0 #1a3060; }
+  .up-btn.l { background: linear-gradient(180deg, #b0ff99, #40a030); color: #fff; box-shadow: 0 2px 0 #184010; }
 
   #flash {
     position: fixed; inset: 0;
@@ -345,11 +405,8 @@
     0% { opacity: 1; transform: translate(0,0) scale(0.5); }
     100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(var(--rot)); }
   }
-
   #resetBtn {
-    position: absolute;
-    top: calc(6px + env(safe-area-inset-top));
-    right: 8px;
+    position: absolute; top: calc(6px + env(safe-area-inset-top)); right: 8px;
     background: #200; border: 2px solid #a03030; color: #f88;
     border-radius: 8px; width: 28px; height: 28px; font-size: 12px;
     cursor: pointer; z-index: 20;
@@ -357,12 +414,19 @@
     font-weight: bold; touch-action: manipulation;
   }
   #resetBtn:active { transform: scale(0.9); }
-
+  #saveIndicator {
+    position: absolute; top: calc(6px + env(safe-area-inset-top)); right: 42px;
+    background: #0a2a0a; border: 2px solid #4a8a4a; color: #8f8;
+    border-radius: 8px; padding: 3px 8px;
+    font-size: 10px; font-weight: bold; z-index: 20;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  #saveIndicator.on { opacity: 1; }
   @media (orientation: landscape) and (max-height: 500px) {
     #bottom { max-height: 60vh; }
     .char-svg { width: 76px; height: 76px; }
     #log { height: 34px; font-size: 10px; }
-    .btn { padding: 7px 4px; font-size: 10px; }
+    .btn { padding: 6px 3px; font-size: 9px; }
   }
   @media (min-width: 768px) {
     .char-svg { width: 120px; height: 120px; }
@@ -372,10 +436,9 @@
     #rouletteWrap { height: 80px; }
     .slot { min-width: 100px; }
     .slot svg { width: 60px; height: 60px; }
-    .btn { font-size: 13px; padding: 12px 8px; }
+    .btn { font-size: 12px; padding: 10px 6px; }
     #log { height: 60px; font-size: 12px; }
   }
-
   #toast {
     position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%) scale(0.8);
@@ -388,23 +451,79 @@
   }
   #toast.on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
-  /* Индикатор сохранения */
-  #saveIndicator {
-    position: absolute;
-    top: calc(6px + env(safe-area-inset-top));
-    right: 42px;
-    background: #0a2a0a;
-    border: 2px solid #4a8a4a;
-    color: #8f8;
-    border-radius: 8px;
-    padding: 3px 8px;
-    font-size: 10px;
-    font-weight: bold;
-    z-index: 20;
-    opacity: 0;
-    transition: opacity 0.3s;
+  .settings-row {
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(180deg, #3a2048, #1e0e28);
+    border: 2px solid #4a2a5a; border-radius: 10px;
+    padding: 10px 12px; margin-bottom: 8px;
   }
-  #saveIndicator.on { opacity: 1; }
+  .settings-row .label { font-size: 12px; font-weight: bold; color: #ffd0e8; }
+  .settings-row .value { font-size: 11px; color: #ffd76e; }
+  .toggle {
+    width: 46px; height: 26px; border-radius: 13px;
+    background: #333; border: 2px solid #555;
+    position: relative; cursor: pointer; transition: 0.2s;
+    flex-shrink: 0;
+  }
+  .toggle.on { background: #4a8a4a; border-color: #6aaa6a; }
+  .toggle::after {
+    content: ''; position: absolute; top: 1px; left: 1px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #fff; transition: 0.2s;
+    box-shadow: 0 2px 4px #0008;
+  }
+  .toggle.on::after { transform: translateX(20px); }
+
+  .ach-card {
+    display: flex; align-items: center; gap: 12px;
+    background: linear-gradient(180deg, #3a2048, #1e0e28);
+    border: 2px solid #4a2a5a; border-radius: 10px;
+    padding: 10px 12px; margin-bottom: 8px;
+    opacity: 0.5; transition: 0.2s;
+  }
+  .ach-card.unlocked { opacity: 1; border-color: #ffd76e; box-shadow: 0 0 12px #ffd76e44; }
+  .ach-card .ic {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+    background: #2a1830; border: 2px solid #4a2a5a;
+  }
+  .ach-card.unlocked .ic { background: linear-gradient(180deg, #ffd76e, #d0a020); border-color: #ffe8b0; }
+  .ach-card .txt { flex: 1; }
+  .ach-card .txt h4 { font-size: 12px; color: #ffd76e; margin-bottom: 2px; }
+  .ach-card .txt p { font-size: 10px; color: #bbb; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat-box {
+    background: linear-gradient(180deg, #3a2048, #1e0e28);
+    border: 2px solid #4a2a5a; border-radius: 10px;
+    padding: 10px; text-align: center;
+  }
+  .stat-box .v { font-size: 20px; font-weight: 900; color: #ffd76e; text-shadow: 0 0 10px #ffd76e66; }
+  .stat-box .l { font-size: 10px; color: #bbb; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .skin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px; }
+  .skin-card {
+    background: linear-gradient(180deg, #3a2048, #1e0e28);
+    border: 2px solid #4a2a5a; border-radius: 12px;
+    padding: 10px; text-align: center; cursor: pointer;
+    transition: 0.15s;
+  }
+  .skin-card:active { transform: scale(0.96); }
+  .skin-card.equipped { border-color: #ffd76e; box-shadow: 0 0 15px #ffd76e66; }
+  .skin-card .preview { width: 60px; height: 60px; margin: 0 auto 6px; }
+  .skin-card h4 { font-size: 12px; color: #ffd76e; margin-bottom: 4px; }
+  .skin-card .price { font-size: 11px; color: #ffd76e; }
+  .skin-card .equipped-tag { font-size: 10px; color: #8f8; margin-top: 2px; }
+
+  textarea.code-input {
+    width: 100%; min-height: 100px; padding: 10px;
+    background: #0a0418; color: #ffd76e;
+    border: 2px solid #6a3a7a; border-radius: 10px;
+    font-family: 'Consolas', monospace; font-size: 11px;
+    resize: vertical; margin-bottom: 8px;
+  }
+  textarea.code-input:focus { outline: none; border-color: #ff8ec8; }
 </style>
 </head>
 <body>
@@ -432,11 +551,35 @@
     </div>
     <div id="controls">
       <button class="btn gold" id="btnSpin" disabled>🎰 КРУТИТЬ</button>
-      <button class="btn alt" id="btnBoxes">📦 Авоська</button>
+      <button class="btn shop" id="btnShop">🏪 Магаз</button>
+      <button class="btn alt" id="btnUpgrade">📈 Прокач</button>
       <button class="btn alt" id="btnMixer">🧪 Миксер</button>
-      <button class="btn alt" id="btnSell">💰 Продать</button>
+      <button class="btn alt" id="btnBoxes">📦 Откр</button>
+      <button class="btn pvp" id="btnPvp">⚔️ PvP</button>
+      <button class="btn alt" id="btnSkins">🎨 Скины</button>
+      <button class="btn alt" id="btnAchievements">🏆 Ачив</button>
+      <button class="btn alt" id="btnStats">📊 Стата</button>
+      <button class="btn settings" id="btnSettings">⚙️ Настр</button>
     </div>
     <div id="log"></div>
+  </div>
+</div>
+
+<div class="modal" id="modalShop">
+  <div class="modal-box">
+    <h2>🏪 МАГАЗИН</h2>
+    <p>Авоськи за монеты — внутри случайный персик</p>
+    <div id="shopList"></div>
+    <div class="row"><button class="btn" id="btnCloseShop" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
+  </div>
+</div>
+
+<div class="modal" id="modalUpgrade">
+  <div class="modal-box">
+    <h2>📈 ПРОКАЧКА</h2>
+    <p>Трать монеты на усиление котиков</p>
+    <div id="upgradeList"></div>
+    <div class="row"><button class="btn" id="btnCloseUpgrade" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
   </div>
 </div>
 
@@ -453,12 +596,76 @@
   </div>
 </div>
 
+<div class="modal" id="modalAchievements">
+  <div class="modal-box">
+    <h2>🏆 ДОСТИЖЕНИЯ</h2>
+    <div id="achList"></div>
+    <div class="row"><button class="btn" id="btnCloseAch" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
+  </div>
+</div>
+
+<div class="modal" id="modalStats">
+  <div class="modal-box">
+    <h2>📊 СТАТИСТИКА</h2>
+    <div id="statsContent"></div>
+    <div class="row"><button class="btn" id="btnCloseStats" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
+  </div>
+</div>
+
+<div class="modal" id="modalSkins">
+  <div class="modal-box">
+    <h2>🎨 СКИНЫ</h2>
+    <p>Меняют внешний вид всех твоих котиков</p>
+    <div id="skinsContent" class="skin-grid"></div>
+    <div class="row"><button class="btn" id="btnCloseSkins" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
+  </div>
+</div>
+
+<div class="modal" id="modalPvp">
+  <div class="modal-box">
+    <h2>⚔️ PVP АРЕНА</h2>
+    <p>Бой по статистикам — отправь код другу или вставь его код</p>
+    <div id="pvpContent"></div>
+    <div class="row">
+      <button class="btn pvp" id="btnCreatePvp">🎫 Создать вызов</button>
+      <button class="btn alt" id="btnEnterPvp">📥 Ввести код</button>
+    </div>
+    <div class="row" style="margin-top:8px;"><button class="btn" id="btnClosePvp" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
+  </div>
+</div>
+
+<div class="modal" id="modalSettings">
+  <div class="modal-box">
+    <h2>⚙️ НАСТРОЙКИ</h2>
+    <div id="settingsContent"></div>
+    <div class="row"><button class="btn" id="btnCloseSettings" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
+  </div>
+</div>
+
 <div id="flash"></div>
 <div id="toast"></div>
 
 <script>
 // ============================================================
-//  SVG ПЕРСОНАЖИ
+//  ИМЕНА
+// ============================================================
+const UNIQUE_NAMES = [
+  'Мурзик','Барсик','Пушок','Снежок','Рыжик','Дымка','Персик','Кексик','Лапка','Соня',
+  'Тигра','Мяу','Багира','Мурка','Симба','Бублик','Тимка','Клёпа','Мурчик','Зефир',
+  'Пуся','Буся','Муся','Нюша','Кнопа','Плюша','Мила','Кроша','Боня','Тоша',
+  'Кузя','Вася','Мурлыка','Пушистик','Лапушка','Пельмень','Котлета','Сосиска','Батон','Бармалей',
+  'Мурчелло','Персиваль','Котопёс','Мяуцарь','Хвостик','Усатик','Полосатик','Пузырь','Клубок','Сырник',
+  'Пончик','Пряник','Круассан','Эклер','Капкейк','Маффин','Пирожок','Вафля','Карамель','Цезарь',
+  'Наполеон','Александр','Клеопатра','Юлий','Максимус','Леонид','Спартак','Ахиллес','Геркулес','Зевс',
+  'Аполлон','Гермес','Арес','Посейдон','Гадес','Кронос','Титан','Атлас','Прометей','Лунный',
+  'Солнечный','Звёздный','Туманный','Огненный','Ледяной','Громовой','Ветряной','Земляной','Теневой','Радужный',
+  'Бархатный','Кристальный','Сапфировый','Изумрудный','Рубиновый','Алмазный','Жемчужный','Золотой','Серебряный','Вихрь',
+  'Пламя','Искра','Молния','Гроза','Шторм','Циклон','Тайфун','Смерч','Лавина','Космос',
+  'Комета','Астероид','Метеор','Галактика','Туманность','Орбита','Пульсар','Квазар','Нейтрон','Мурмур'
+];
+
+// ============================================================
+//  SVG
 // ============================================================
 const CAT_PALETTES = {
   1: { fur:'#d8b890', fur2:'#b89870', ears:'#c89878', inner:'#ffc0d0', eyes:'#3a5a3a', nose:'#ff8898' },
@@ -466,10 +673,15 @@ const CAT_PALETTES = {
   3: { fur:'#a8c0f0', fur2:'#7898d0', ears:'#88a8e0', inner:'#ffd0e0', eyes:'#1a3a6a', nose:'#ff8898' },
   4: { fur:'#d0a8e8', fur2:'#a878c0', ears:'#b888d0', inner:'#ffd0e0', eyes:'#4a1a5a', nose:'#ff8898' },
   5: { fur:'#ffd88a', fur2:'#e0b040', ears:'#f0c060', inner:'#fff0c0', eyes:'#6a3a0a', nose:'#ff8898' },
+  6: { fur:'#ffb0e0', fur2:'#d060b0', ears:'#e080c0', inner:'#fff0f8', eyes:'#6a0a5a', nose:'#ff5898' },
 };
 
-function catSVG(rarity = 1, boss = false, size = 96) {
-  const p = CAT_PALETTES[rarity] || CAT_PALETTES[1];
+function catSVG(rarity = 1, boss = false, size = 96, skin = null) {
+  const p = { ...(CAT_PALETTES[rarity] || CAT_PALETTES[1]) };
+  if (skin === 'pirate') { p.fur = '#8a6040'; p.fur2 = '#5a3020'; p.ears = '#7a5030'; }
+  if (skin === 'ninja') { p.fur = '#2a2a3a'; p.fur2 = '#101018'; p.ears = '#1a1a2a'; p.inner = '#404050'; }
+  if (skin === 'wizard') { p.fur = '#6a4a9a'; p.fur2 = '#3a2050'; p.ears = '#5a3a8a'; p.inner = '#a080d0'; }
+  if (skin === 'golden') { p.fur = '#ffd88a'; p.fur2 = '#d0a020'; p.ears = '#f0c060'; p.inner = '#fff0c0'; }
   const gid = 'g' + Math.random().toString(36).slice(2,8);
   const glow = rarity >= 4 ? 'filter="url(#glow' + gid + ')"' : '';
   return `
@@ -499,32 +711,25 @@ function catSVG(rarity = 1, boss = false, size = 96) {
   <ellipse cx="66" cy="42" rx="6" ry="7" fill="${p.eyes}" ${glow}/>
   <ellipse cx="45" cy="40" rx="2.5" ry="3" fill="#fff"/>
   <ellipse cx="67" cy="40" rx="2.5" ry="3" fill="#fff"/>
-  <circle cx="43.5" cy="44" r="1.2" fill="#fff" opacity="0.9"/>
-  <circle cx="65.5" cy="44" r="1.2" fill="#fff" opacity="0.9"/>
   <path d="M53 50 L57 50 L55 53 Z" fill="${p.nose}"/>
   <path d="M55 53 Q52 57 49 55" fill="none" stroke="#4a2030" stroke-width="1.2" stroke-linecap="round"/>
   <path d="M55 53 Q58 57 61 55" fill="none" stroke="#4a2030" stroke-width="1.2" stroke-linecap="round"/>
-  <line x1="30" y1="50" x2="42" y2="51" stroke="#4a2030" stroke-width="0.8" opacity="0.7"/>
-  <line x1="30" y1="55" x2="42" y2="54" stroke="#4a2030" stroke-width="0.8" opacity="0.7"/>
-  <line x1="80" y1="50" x2="68" y2="51" stroke="#4a2030" stroke-width="0.8" opacity="0.7"/>
-  <line x1="80" y1="55" x2="68" y2="54" stroke="#4a2030" stroke-width="0.8" opacity="0.7"/>
   <ellipse cx="42" cy="92" rx="8" ry="5" fill="${p.fur}" stroke="${p.fur2}" stroke-width="1.5"/>
   <ellipse cx="68" cy="92" rx="8" ry="5" fill="${p.fur}" stroke="${p.fur2}" stroke-width="1.5"/>
+  ${skin === 'pirate' ? `
+  <path d="M30 40 Q55 20 80 40 L80 44 Q55 26 30 44 Z" fill="#202030" stroke="#000" stroke-width="1.5"/>
+  <circle cx="55" cy="42" r="6" fill="#000"/>
+  ` : ''}
+  ${skin === 'ninja' ? `
+  <path d="M25 40 Q55 30 85 40 L85 50 Q55 42 25 50 Z" fill="#1a1a2a" stroke="#000" stroke-width="1.5"/>
+  ` : ''}
+  ${skin === 'wizard' ? `
+  <path d="M55 5 L45 40 L65 40 Z" fill="#4a2a8a" stroke="#2a1060" stroke-width="1.5"/>
+  <ellipse cx="55" cy="40" rx="22" ry="5" fill="#4a2a8a" stroke="#2a1060" stroke-width="1.5"/>
+  ` : ''}
   ${boss ? `
   <g transform="translate(55,10)">
-    <path d="M-18 6 L-14 -6 L-6 0 L0 -10 L6 0 L14 -6 L18 6 Z" fill="#ffd76e" stroke="#a07020" stroke-width="1.5" stroke-linejoin="round"/>
-    <circle cx="-14" cy="-4" r="2" fill="#ff4a8a"/>
-    <circle cx="0" cy="-8" r="2.5" fill="#4affd0"/>
-    <circle cx="14" cy="-4" r="2" fill="#ff4a8a"/>
-  </g>` : ''}
-  ${rarity >= 4 ? `
-  <g opacity="0.8">
-    <circle cx="20" cy="20" r="2" fill="#fff" opacity="0.8">
-      <animate attributeName="opacity" values="0.2;1;0.2" dur="1.5s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="92" cy="30" r="2" fill="#fff" opacity="0.8">
-      <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
-    </circle>
+    <path d="M-18 6 L-14 -6 L-6 0 L0 -10 L6 0 L14 -6 L18 6 Z" fill="#ffd76e" stroke="#a07020" stroke-width="1.5"/>
   </g>` : ''}
 </svg>`;
 }
@@ -537,39 +742,23 @@ function thornSVG(boss = false, size = 96) {
 <svg class="char-svg" viewBox="0 0 110 110" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
   <ellipse cx="55" cy="100" rx="32" ry="6" fill="#000" opacity="0.4"/>
   <ellipse cx="55" cy="62" rx="30" ry="36" fill="${body}" stroke="${body2}" stroke-width="2.5"/>
-  <ellipse cx="55" cy="62" rx="30" ry="36" fill="url(#thornGrad${boss?'b':'n'})" opacity="0.7"/>
-  <defs>
-    <radialGradient id="thornGrad${boss?'b':'n'}" cx="35%" cy="25%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="${body2}" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
+  <defs><radialGradient id="tg${boss?'b':'n'}" cx="35%" cy="25%">
+    <stop offset="0%" stop-color="#fff" stop-opacity="0.4"/><stop offset="100%" stop-color="${body2}" stop-opacity="0"/>
+  </radialGradient></defs>
+  <ellipse cx="55" cy="62" rx="30" ry="36" fill="url(#tg${boss?'b':'n'})" opacity="0.7"/>
   <g fill="${spike}" stroke="${body2}" stroke-width="1" stroke-linejoin="round">
-    <path d="M30 40 L22 32 L34 34 Z"/>
-    <path d="M80 40 L88 32 L76 34 Z"/>
-    <path d="M22 62 L12 60 L22 68 Z"/>
-    <path d="M88 62 L98 60 L88 68 Z"/>
-    <path d="M32 88 L24 96 L36 90 Z"/>
-    <path d="M78 88 L86 96 L74 90 Z"/>
-    <path d="M45 22 L42 10 L52 20 Z"/>
-    <path d="M65 22 L68 10 L58 20 Z"/>
+    <path d="M30 40 L22 32 L34 34 Z"/><path d="M80 40 L88 32 L76 34 Z"/>
+    <path d="M22 62 L12 60 L22 68 Z"/><path d="M88 62 L98 60 L88 68 Z"/>
+    <path d="M32 88 L24 96 L36 90 Z"/><path d="M78 88 L86 96 L74 90 Z"/>
+    <path d="M45 22 L42 10 L52 20 Z"/><path d="M65 22 L68 10 L58 20 Z"/>
   </g>
   <path d="M32 50 L44 54 L44 62 L32 60 Z" fill="#200"/>
   <path d="M78 50 L66 54 L66 62 L78 60 Z" fill="#200"/>
-  <circle cx="40" cy="56" r="3" fill="#ff3030"/>
-  <circle cx="70" cy="56" r="3" fill="#ff3030"/>
-  <circle cx="40" cy="56" r="1.2" fill="#fff"/>
-  <circle cx="70" cy="56" r="1.2" fill="#fff"/>
+  <circle cx="40" cy="56" r="3" fill="#ff3030"/><circle cx="70" cy="56" r="3" fill="#ff3030"/>
   <path d="M30 44 L46 50" stroke="#200" stroke-width="3" stroke-linecap="round"/>
   <path d="M80 44 L64 50" stroke="#200" stroke-width="3" stroke-linecap="round"/>
   <path d="M40 76 Q55 84 70 76 L68 82 L64 78 L60 84 L55 78 L50 84 L46 78 L42 82 Z" fill="#200" stroke="#500" stroke-width="1"/>
-  ${boss ? `
-  <g transform="translate(55,10)">
-    <path d="M-20 8 L-16 -8 L-6 -2 L0 -14 L6 -2 L16 -8 L20 8 Z" fill="#ffd76e" stroke="#a07020" stroke-width="1.5"/>
-    <circle cx="-16" cy="-6" r="2.5" fill="#ff2020"/>
-    <circle cx="0" cy="-10" r="3" fill="#20ff90"/>
-    <circle cx="16" cy="-6" r="2.5" fill="#ff2020"/>
-  </g>` : ''}
+  ${boss ? `<g transform="translate(55,10)"><path d="M-20 8 L-16 -8 L-6 -2 L0 -14 L6 -2 L16 -8 L20 8 Z" fill="#ffd76e" stroke="#a07020" stroke-width="1.5"/></g>` : ''}
 </svg>`;
 }
 
@@ -580,47 +769,91 @@ function slotPeachSVG() {
     <path d="M20 12 Q18 6 14 4 Q20 4 22 8 Q24 4 30 4 Q26 6 24 12 Z" fill="#5a8a3a"/>
     <ellipse cx="14" cy="24" rx="2" ry="2.5" fill="#3a2030"/>
     <ellipse cx="26" cy="24" rx="2" ry="2.5" fill="#3a2030"/>
-    <path d="M18 30 Q20 32 22 30" stroke="#802040" stroke-width="1.2" fill="none" stroke-linecap="round"/>
   </svg>`;
 }
 function slotThornSVG() {
   return `<svg viewBox="0 0 40 40" width="46" height="46">
     <ellipse cx="20" cy="22" rx="13" ry="15" fill="#4a8a3a" stroke="#2a6020" stroke-width="1.5"/>
     <g fill="#a0e090" stroke="#2a6020" stroke-width="0.8">
-      <path d="M8 14 L4 10 L12 12 Z"/>
-      <path d="M32 14 L36 10 L28 12 Z"/>
-      <path d="M8 30 L4 34 L12 32 Z"/>
-      <path d="M32 30 L36 34 L28 32 Z"/>
+      <path d="M8 14 L4 10 L12 12 Z"/><path d="M32 14 L36 10 L28 12 Z"/>
+      <path d="M8 30 L4 34 L12 32 Z"/><path d="M32 30 L36 34 L28 32 Z"/>
     </g>
     <path d="M12 18 L20 21 L20 26 L12 24 Z" fill="#200"/>
     <path d="M28 18 L20 21 L20 26 L28 24 Z" fill="#200"/>
     <circle cx="16" cy="22" r="1.5" fill="#ff3030"/>
     <circle cx="24" cy="22" r="1.5" fill="#ff3030"/>
-    <path d="M14 32 L26 32 L24 35 L16 35 Z" fill="#200"/>
   </svg>`;
 }
 
 // ============================================================
-//  ДАННЫЕ
+//  КОНСТАНТЫ
 // ============================================================
 const RARITY = {
-  1: { name: 'Обычный', mult: 1.0 },
-  2: { name: 'Редкий',  mult: 1.4 },
-  3: { name: 'Эпик',    mult: 1.9 },
-  4: { name: 'Мифик',   mult: 2.6 },
-  5: { name: 'Легенда', mult: 3.5 },
+  1: { name: 'Обычный',     mult: 1.0 },
+  2: { name: 'Редкий',      mult: 1.4 },
+  3: { name: 'Эпик',        mult: 1.9 },
+  4: { name: 'Мифик',       mult: 2.6 },
+  5: { name: 'Легендарный', mult: 3.5 },
+  6: { name: 'Божественный', mult: 5.0 },
 };
-const CAT_NAMES = ['Мурзик','Барсик','Пушок','Снежок','Рыжик','Дымка','Персик','Кексик','Лапка','Соня','Тигра','Мяу','Багира','Мурка','Симба','Бублик','Тимка','Клёпа','Мурчик','Зефир'];
+
+const BOX_TYPES = {
+  basic: { name:'Обычная авоська', cost:30, icon:'📦', cls:'', desc:'Шанс на хорошего котика',
+    chances:{1:0.65,2:0.25,3:0.08,4:0.018,5:0.002,6:0} },
+  rare: { name:'Редкая авоська', cost:150, icon:'🎁', cls:'rare', desc:'Гарантированно не хуже редкого',
+    chances:{1:0,2:0.55,3:0.32,4:0.10,5:0.028,6:0.002} },
+  myth: { name:'Мифическая авоська', cost:600, icon:'💎', cls:'myth', desc:'Только мифик и выше',
+    chances:{1:0,2:0,3:0,4:0.65,5:0.30,6:0.05} },
+};
+
+const SKINS = {
+  default: { name:'Обычный',   desc:'Классический окрас',      cost:0 },
+  pirate:  { name:'Пират',     desc:'Йо-хо-хо!',                cost:200 },
+  ninja:   { name:'Ниндзя',    desc:'Невидимый воин',           cost:350 },
+  wizard:  { name:'Волшебник', desc:'Магия персиков',           cost:500 },
+  golden:  { name:'Золотой',   desc:'Для настоящих королей',    cost:1000 },
+};
+
+const ACHIEVEMENTS = [
+  { id:'first_cat',   name:'Первый шаг',     desc:'Получи первого котика',    icon:'🐱' },
+  { id:'first_win',   name:'Первая кровь',   desc:'Победи в первом бою',       icon:'⚔️' },
+  { id:'wins_10',     name:'Боец',           desc:'10 побед',                  icon:'🥊' },
+  { id:'wins_50',     name:'Ветеран',        desc:'50 побед',                  icon:'🎖️' },
+  { id:'wins_100',    name:'Легенда',        desc:'100 побед',                 icon:'👑' },
+  { id:'first_boss',  name:'Босс-киллер',    desc:'Победи первого босса',      icon:'👹' },
+  { id:'bosses_5',    name:'Гроза боссов',   desc:'5 боссов убито',            icon:'💀' },
+  { id:'legendary',   name:'Легенда',        desc:'Получить 5★ котика',        icon:'🌟' },
+  { id:'divine',      name:'Божество',       desc:'Получить 6★ котика',        icon:'✨' },
+  { id:'rich_1000',   name:'Богач',          desc:'Заработать 1000 монет',     icon:'💰' },
+  { id:'rich_10000',  name:'Магнат',         desc:'Заработать 10000 монет',    icon:'🏦' },
+  { id:'cats_10',     name:'Коллекционер',   desc:'10 котиков в коллекции',    icon:'📚' },
+  { id:'cats_25',     name:'Зоопарк',        desc:'25 котиков в коллекции',    icon:'🦁' },
+  { id:'mix_5',       name:'Алхимик',        desc:'5 скрещиваний',             icon:'🧪' },
+  { id:'cycle_10',    name:'Путешественник', desc:'10 циклов пройдено',        icon:'🔄' },
+  { id:'pvp_win',     name:'Дуэлянт',        desc:'Победить в PvP',            icon:'🎯' },
+  { id:'skins_3',     name:'Модник',         desc:'Купить 3 скина',            icon:'🎨' },
+];
+
+// ============================================================
+//  УТИЛИТЫ
+// ============================================================
 const rnd = (a, b) => Math.random() * (b - a) + a;
 const rndI = (a, b) => Math.floor(rnd(a, b + 1));
 const pick = a => a[rndI(0, a.length - 1)];
 
 let _id = 0;
+function pickRarityByChances(chances) {
+  const r = Math.random(); let acc = 0;
+  for (const [rar, ch] of Object.entries(chances)) {
+    acc += ch; if (r < acc) return parseInt(rar);
+  }
+  return 1;
+}
 function makeCat(rarity = null) {
-  const r = rarity || (Math.random() < 0.5 ? 1 : Math.random() < 0.8 ? 2 : Math.random() < 0.95 ? 3 : Math.random() < 0.99 ? 4 : 5);
+  const r = rarity || pickRarityByChances(BOX_TYPES.basic.chances);
   const base = 5 * r;
   return {
-    id: ++_id, name: pick(CAT_NAMES), rarity: r,
+    id: ++_id, name: pick(UNIQUE_NAMES), rarity: r,
     power: rndI(base, base + 5), resist: rndI(base, base + 4),
     luck: rndI(1, base), level: 1,
   };
@@ -634,35 +867,46 @@ function makeThorn(boss = false) {
     id: ++_id, name: boss ? 'БОСС' : 'Шиповник', boss,
     power: Math.floor(base * scale),
     spike: Math.floor((boss ? rndI(3,6) : rndI(1,4)) * scale),
-    reward: boss ? rndI(50, 100) : rndI(10, 30),
+    reward: boss ? rndI(80, 150) : rndI(15, 35),
     glass: boss ? rndI(3, 6) : (Math.random() < 0.3 ? 1 : 0),
     hp: hpMax, hpMax,
   };
 }
+function upgradeCost(cat, stat) {
+  const base = stat === 'power' ? 20 : stat === 'resist' ? 15 : 25;
+  const statLvl = stat === 'power' ? cat.power : stat === 'resist' ? cat.resist : cat.luck;
+  return Math.floor(base * (1 + cat.level * 0.5) * (1 + statLvl * 0.05));
+}
 
 // ============================================================
-//  СОСТОЯНИЕ + СОХРАНЕНИЕ
+//  СОСТОЯНИЕ
 // ============================================================
-const SAVE_KEY = 'persiki_save_v1';
+const SAVE_KEY = 'persiki_save_v3';
 let state = {
   cats: [], thorns: [], placed: [], chosenThorn: null,
   coins: 50, glasses: 0, boxes: 3, cycle: 0,
   rolling: false, idCounter: 0,
+  lastDailyBonus: 0,
+  achievements: {},
+  stats: { totalSpins:0, totalWins:0, totalLosses:0, bossesKilled:0, totalCoinsEarned:0, mixesDone:0, cyclesCompleted:0, pvpWins:0 },
+  skins: { owned: ['default'], equipped: 'default' },
+  soundOn: true,
+  vibrationOn: true,
 };
 
 function saveGame() {
   try {
-    const data = {
+    localStorage.setItem(SAVE_KEY, JSON.stringify({
       cats: state.cats, thorns: state.thorns, placed: state.placed,
       chosenThorn: state.chosenThorn, coins: state.coins,
       glasses: state.glasses, boxes: state.boxes, cycle: state.cycle,
-      idCounter: _id,
-    };
-    localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+      idCounter: _id, lastDailyBonus: state.lastDailyBonus,
+      achievements: state.achievements, stats: state.stats,
+      skins: state.skins, soundOn: state.soundOn, vibrationOn: state.vibrationOn,
+    }));
     showSaveIndicator();
   } catch (e) { console.warn('Save fail', e); }
 }
-
 let saveTimer = null;
 function showSaveIndicator() {
   const el = document.getElementById('saveIndicator');
@@ -670,7 +914,6 @@ function showSaveIndicator() {
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => el.classList.remove('on'), 800);
 }
-
 function loadGame() {
   try {
     const raw = localStorage.getItem(SAVE_KEY);
@@ -684,8 +927,13 @@ function loadGame() {
     state.glasses = d.glasses ?? 0;
     state.boxes = d.boxes ?? 3;
     state.cycle = d.cycle ?? 0;
+    state.lastDailyBonus = d.lastDailyBonus ?? 0;
+    state.achievements = d.achievements || {};
+    state.stats = Object.assign({ totalSpins:0, totalWins:0, totalLosses:0, bossesKilled:0, totalCoinsEarned:0, mixesDone:0, cyclesCompleted:0, pvpWins:0 }, d.stats || {});
+    state.skins = d.skins || { owned: ['default'], equipped: 'default' };
+    state.soundOn = d.soundOn ?? true;
+    state.vibrationOn = d.vibrationOn ?? true;
     _id = d.idCounter || 0;
-    // если шиповников нет — новый цикл
     if (state.thorns.length === 0) {
       state.cycle++;
       const isBoss = state.cycle % 5 === 0;
@@ -695,12 +943,18 @@ function loadGame() {
     return true;
   } catch (e) { console.warn('Load fail', e); return false; }
 }
-
 function resetGame() {
-  if (!confirm('Сбросить весь прогресс? Это действие нельзя отменить.')) return;
+  if (!confirm('Сбросить ВЕСЬ прогресс? Это нельзя отменить.')) return;
   localStorage.removeItem(SAVE_KEY);
-  state.cats = []; state.thorns = []; state.placed = []; state.chosenThorn = null;
-  state.coins = 50; state.glasses = 0; state.boxes = 3; state.cycle = 0;
+  state = {
+    cats: [], thorns: [], placed: [], chosenThorn: null,
+    coins: 50, glasses: 0, boxes: 3, cycle: 0,
+    rolling: false, idCounter: 0, lastDailyBonus: 0,
+    achievements: {},
+    stats: { totalSpins:0, totalWins:0, totalLosses:0, bossesKilled:0, totalCoinsEarned:0, mixesDone:0, cyclesCompleted:0, pvpWins:0 },
+    skins: { owned: ['default'], equipped: 'default' },
+    soundOn: true, vibrationOn: true,
+  };
   _id = 0;
   document.getElementById('log').innerHTML = '';
   init();
@@ -708,51 +962,40 @@ function resetGame() {
 }
 
 // ============================================================
-//  ЗВУК (WebAudio)
+//  ЗВУК
 // ============================================================
 let audioCtx = null;
 function ac() {
-  if (!audioCtx) {
-    try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-    catch (e) {}
-  }
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} }
   return audioCtx;
 }
-function beep(freq, dur, type = 'square', vol = 0.05) {
+function beep(f, d, t = 'square', v = 0.05) {
+  if (!state.soundOn) return;
   const c = ac(); if (!c) return;
-  const o = c.createOscillator();
-  const g = c.createGain();
-  o.type = type;
-  o.frequency.value = freq;
-  g.gain.setValueAtTime(vol, c.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + dur);
+  const o = c.createOscillator(); const g = c.createGain();
+  o.type = t; o.frequency.value = f;
+  g.gain.setValueAtTime(v, c.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + d);
   o.connect(g); g.connect(c.destination);
-  o.start(); o.stop(c.currentTime + dur);
+  o.start(); o.stop(c.currentTime + d);
 }
 function sfxClick() { beep(800, 0.05, 'square', 0.04); }
 function sfxWin() {
-  beep(523, 0.1, 'square', 0.06);
-  setTimeout(() => beep(659, 0.1, 'square', 0.06), 100);
-  setTimeout(() => beep(784, 0.15, 'square', 0.06), 200);
-  setTimeout(() => beep(1047, 0.3, 'square', 0.07), 350);
+  beep(523, 0.1); setTimeout(() => beep(659, 0.1), 100);
+  setTimeout(() => beep(784, 0.15), 200);
+  setTimeout(() => beep(1047, 0.3), 350);
 }
 function sfxLose() {
   beep(300, 0.15, 'sawtooth', 0.05);
   setTimeout(() => beep(200, 0.25, 'sawtooth', 0.05), 150);
 }
 function sfxTick() { beep(1200, 0.02, 'square', 0.02); }
-function sfxSpin() {
-  // Тик-тик-тик ускоряющийся
-  for (let i = 0; i < 30; i++) {
-    setTimeout(() => sfxTick(), i * (30 + i * 6));
-  }
-}
-function vibrate(ms) {
-  if (navigator.vibrate) navigator.vibrate(ms);
-}
+function sfxSpin() { for (let i = 0; i < 30; i++) setTimeout(() => sfxTick(), i * (30 + i * 6)); }
+function sfxBuy() { beep(600, 0.06); setTimeout(() => beep(900, 0.08), 60); setTimeout(() => beep(1200, 0.12), 140); }
+function vibrate(ms) { if (state.vibrationOn && navigator.vibrate) navigator.vibrate(ms); }
 
 // ============================================================
-//  ЛОГ
+//  УТИЛИТЫ UI
 // ============================================================
 function log(msg, cls = '') {
   const el = document.getElementById('log');
@@ -771,28 +1014,57 @@ function toast(msg) {
 }
 function flash() {
   const f = document.getElementById('flash');
-  f.classList.remove('go');
-  void f.offsetWidth;
-  f.classList.add('go');
+  f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
 }
-function coinBurst() {
+function coinBurst(n = 8) {
   const rect = document.getElementById('rouletteWrap').getBoundingClientRect();
   const cx = rect.left + rect.width / 2;
   const cy = rect.top + rect.height / 2;
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < n; i++) {
     const c = document.createElement('div');
     c.className = 'coin';
-    c.textContent = ['💰','🪙','⭐','💎','🍑'][rndI(0,4)];
-    c.style.left = cx + 'px';
-    c.style.top = cy + 'px';
-    const dx = (Math.random() - 0.5) * 400;
-    const dy = -Math.random() * 300 - 100;
-    c.style.setProperty('--dx', dx + 'px');
-    c.style.setProperty('--dy', dy + 'px');
+    c.textContent = ['💰','🪙','⭐','💎','🍑','✨'][rndI(0,5)];
+    c.style.left = cx + 'px'; c.style.top = cy + 'px';
+    c.style.setProperty('--dx', (Math.random() - 0.5) * 400 + 'px');
+    c.style.setProperty('--dy', (-Math.random() * 300 - 100) + 'px');
     c.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
     document.body.appendChild(c);
     setTimeout(() => c.remove(), 1300);
   }
+}
+
+// ============================================================
+//  АЧИВКИ
+// ============================================================
+function unlockAch(id) {
+  if (state.achievements[id]) return;
+  state.achievements[id] = Date.now();
+  const a = ACHIEVEMENTS.find(x => x.id === id);
+  if (a) {
+    log(`🏆 Достижение: ${a.name} — ${a.desc}`, 'ach');
+    toast(`🏆 ${a.name}`);
+    sfxWin();
+  }
+  saveGame();
+}
+function checkAchievements() {
+  if (state.cats.length >= 1) unlockAch('first_cat');
+  if (state.stats.totalWins >= 1) unlockAch('first_win');
+  if (state.stats.totalWins >= 10) unlockAch('wins_10');
+  if (state.stats.totalWins >= 50) unlockAch('wins_50');
+  if (state.stats.totalWins >= 100) unlockAch('wins_100');
+  if (state.stats.bossesKilled >= 1) unlockAch('first_boss');
+  if (state.stats.bossesKilled >= 5) unlockAch('bosses_5');
+  if (state.cats.some(c => c.rarity >= 5)) unlockAch('legendary');
+  if (state.cats.some(c => c.rarity >= 6)) unlockAch('divine');
+  if (state.stats.totalCoinsEarned >= 1000) unlockAch('rich_1000');
+  if (state.stats.totalCoinsEarned >= 10000) unlockAch('rich_10000');
+  if (state.cats.length >= 10) unlockAch('cats_10');
+  if (state.cats.length >= 25) unlockAch('cats_25');
+  if (state.stats.mixesDone >= 5) unlockAch('mix_5');
+  if (state.stats.cyclesCompleted >= 10) unlockAch('cycle_10');
+  if (state.stats.pvpWins >= 1) unlockAch('pvp_win');
+  if (state.skins.owned.length >= 3) unlockAch('skins_3');
 }
 
 // ============================================================
@@ -815,10 +1087,11 @@ function starsHTML(rar) {
 function renderField() {
   const f = document.getElementById('field');
   f.innerHTML = '';
+  const skin = state.skins.equipped;
   state.cats.filter(c => state.placed.includes(c.id)).forEach(c => {
     const el = document.createElement('div');
     el.className = 'char r' + c.rarity;
-    el.innerHTML = `${starsHTML(c.rarity)}${catSVG(c.rarity, false, 96)}<div class="nameplate">${c.name} <span class="lvl">L${c.level}</span> · ⚔${c.power}</div>`;
+    el.innerHTML = `${starsHTML(c.rarity)}${catSVG(c.rarity, false, 96, skin)}<div class="nameplate">${c.name} <span class="lvl">L${c.level}</span> · ⚔${c.power}</div>`;
     el.onclick = () => { sfxClick(); togglePlace(c.id); };
     f.appendChild(el);
   });
@@ -835,10 +1108,11 @@ function renderField() {
 function renderInventory() {
   const bar = document.getElementById('inventoryBar');
   bar.innerHTML = '';
+  const skin = state.skins.equipped;
   state.cats.forEach(c => {
     const el = document.createElement('div');
     el.className = 'inv-item' + (state.placed.includes(c.id) ? ' placed' : '');
-    el.innerHTML = `${catSVG(c.rarity, false, 28)}<div>${c.name}<div class="tag">★${c.rarity} · ⚔${c.power}</div></div>`;
+    el.innerHTML = `${catSVG(c.rarity, false, 28, skin)}<div>${c.name}<div class="tag">★${c.rarity} · ⚔${c.power}</div></div>`;
     el.onclick = () => { sfxClick(); togglePlace(c.id); };
     bar.appendChild(el);
   });
@@ -846,6 +1120,7 @@ function renderInventory() {
 function renderBottom() {
   document.getElementById('btnSpin').disabled = state.rolling || state.placed.length === 0 || !state.chosenThorn;
   document.getElementById('btnBoxes').disabled = state.boxes <= 0;
+  document.getElementById('btnBoxes').textContent = `📦 Откр(${state.boxes})`;
 }
 function renderAll() { renderTop(); renderField(); renderInventory(); renderBottom(); }
 
@@ -857,8 +1132,7 @@ function togglePlace(id) {
   if (i >= 0) state.placed.splice(i, 1);
   else if (state.placed.length < 3) state.placed.push(id);
   else { log('⚠️ Максимум 3 персика на поле', 'lose'); return; }
-  saveGame();
-  renderAll();
+  saveGame(); renderAll();
 }
 
 // ============================================================
@@ -877,9 +1151,7 @@ function buildRoulette(winChance) {
 function spinRoulette(winChance, onDone) {
   const roulette = document.getElementById('roulette');
   const slots = buildRoulette(winChance);
-  roulette.innerHTML = slots.map(s =>
-    `<div class="slot ${s}">${s === 'win' ? slotPeachSVG() : slotThornSVG()}</div>`
-  ).join('');
+  roulette.innerHTML = slots.map(s => `<div class="slot ${s}">${s === 'win' ? slotPeachSVG() : slotThornSVG()}</div>`).join('');
   const slotW = 80;
   const wrapW = document.getElementById('rouletteWrap').clientWidth;
   const centerOffset = wrapW / 2 - slotW / 2;
@@ -916,10 +1188,9 @@ function calcWinChance() {
   chance -= thorn.spike * 0.01;
   return Math.max(0.05, Math.min(0.95, chance));
 }
-function showDamage(el, txt, heal = false) {
+function showDamage(el, txt) {
   const d = document.createElement('div');
-  d.className = 'dmg' + (heal ? ' heal' : '');
-  d.textContent = txt;
+  d.className = 'dmg'; d.textContent = txt;
   el.appendChild(d);
   setTimeout(() => d.remove(), 1000);
 }
@@ -929,19 +1200,17 @@ function doFight() {
   if (!state.chosenThorn) { log('⚠️ Выбери шиповника', 'lose'); return; }
   const thorn = state.thorns.find(t => t.id === state.chosenThorn);
   if (!thorn) return;
-  state.rolling = true;
-  renderBottom();
+  state.rolling = true; renderBottom();
   const chance = calcWinChance();
   log(`🎰 Крутим... шанс победы ${(chance*100).toFixed(0)}%`);
+  state.stats.totalSpins++;
   spinRoulette(chance, (win) => {
     state.rolling = false;
     const thornIdx = state.thorns.findIndex(t => t.id === thorn.id);
     const field = document.getElementById('field');
     const thornEl = field.querySelectorAll('.char')[state.placed.length + thornIdx];
     if (win) {
-      sfxWin();
-      flash();
-      vibrate([40, 30, 80]);
+      sfxWin(); flash(); vibrate([40, 30, 80]);
       const dmgVal = Math.floor(thorn.hpMax * 0.9 + rnd(10, 30));
       thorn.hp = Math.max(0, thorn.hp - dmgVal);
       if (thornEl) {
@@ -955,17 +1224,22 @@ function doFight() {
         log(`✅ ${thorn.name} побеждён! +${thorn.reward} 🪙${thorn.glass ? ` +${thorn.glass} 🥤` : ''}`, 'win');
         state.coins += thorn.reward;
         state.glasses += thorn.glass;
+        state.stats.totalWins++;
+        state.stats.totalCoinsEarned += thorn.reward;
+        if (thorn.boss) {
+          state.stats.bossesKilled++;
+          toast('👑 БОСС ПОБЕЖДЁН!');
+        }
         state.thorns = state.thorns.filter(t => t.id !== thorn.id);
         state.chosenThorn = null;
-        coinBurst();
-        if (thorn.boss) toast('👑 БОСС ПОБЕЖДЁН!');
+        coinBurst(thorn.boss ? 16 : 8);
         if (state.thorns.length === 0) nextCycle();
       } else {
         log(`⚔️ Удар! ${thorn.name} -${dmgVal} HP (${thorn.hp}/${thorn.hpMax})`, 'win');
       }
     } else {
-      sfxLose();
-      vibrate(200);
+      sfxLose(); vibrate(200);
+      state.stats.totalLosses++;
       log(`❌ Промах... персики отброшены`, 'lose');
       if (Math.random() < 0.25 && state.placed.length > 0) {
         const lostId = state.placed[rndI(0, state.placed.length - 1)];
@@ -976,36 +1250,141 @@ function doFight() {
         }
       }
     }
-    saveGame();
-    renderAll();
+    checkAchievements();
+    saveGame(); renderAll();
   });
 }
 function nextCycle() {
   state.cycle++;
+  state.stats.cyclesCompleted++;
   const isBoss = state.cycle % 5 === 0;
   log(`🔄 Цикл ${state.cycle}${isBoss ? ' — БОССФАЙТ! 👑' : ''}`, isBoss ? 'boss' : '');
   state.thorns = [];
   const count = isBoss ? 1 : rndI(2, 3);
   for (let i = 0; i < count; i++) state.thorns.push(makeThorn(isBoss));
   state.placed = [];
-  saveGame();
-  renderAll();
+  checkAchievements();
+  saveGame(); renderAll();
 }
 
 // ============================================================
 //  АВОСЬКИ
 // ============================================================
-function openBox() {
-  if (state.boxes <= 0) return;
-  state.boxes--;
-  const c = makeCat();
+function openBoxByType(typeKey) {
+  const t = BOX_TYPES[typeKey];
+  if (!t) return;
+  const rarity = pickRarityByChances(t.chances);
+  const c = makeCat(rarity);
   state.cats.push(c);
   sfxWin();
-  log(`📦 Из авоськи выпал ${c.name} (${RARITY[c.rarity].name}, ⚔${c.power})`, c.rarity >= 4 ? 'win' : '');
-  if (c.rarity >= 4) toast(`⭐ ${RARITY[c.rarity].name}!`);
-  saveGame();
-  renderAll();
+  const cls = rarity >= 5 ? 'epic' : rarity >= 4 ? 'win' : '';
+  log(`📦 ${t.name}: ${c.name} (${RARITY[rarity].name}, ⚔${c.power})`, cls);
+  if (rarity >= 5) toast(`✨ ${RARITY[rarity].name}! ${c.name}`);
+  else if (rarity >= 4) toast(`⭐ ${RARITY[rarity].name}!`);
+  checkAchievements();
+  saveGame(); renderAll();
 }
+function openStockBoxes() {
+  const n = state.boxes;
+  if (n <= 0) return;
+  state.boxes = 0;
+  for (let i = 0; i < n; i++) openBoxByType('basic');
+  saveGame(); renderAll();
+}
+function buyBox(typeKey) {
+  const t = BOX_TYPES[typeKey];
+  if (!t) return;
+  if (state.coins < t.cost) { log(`💸 Не хватает монет на ${t.name}`, 'lose'); vibrate(100); return; }
+  state.coins -= t.cost;
+  sfxBuy();
+  log(`🛒 Куплена ${t.name} за ${t.cost} 🪙`, 'win');
+  openBoxByType(typeKey);
+  renderAll();
+  renderShop();
+}
+
+// ============================================================
+//  МАГАЗИН
+// ============================================================
+function renderShop() {
+  const list = document.getElementById('shopList');
+  list.innerHTML = '';
+  Object.entries(BOX_TYPES).forEach(([key, t]) => {
+    const el = document.createElement('div');
+    el.className = 'shop-item';
+    const chanceStr = Object.entries(t.chances)
+      .filter(([_, ch]) => ch > 0)
+      .map(([rar, ch]) => `${'★'.repeat(parseInt(rar))} ${(ch*100).toFixed(1)}%`)
+      .join(' · ');
+    el.innerHTML = `
+      <div class="icon ${t.cls}">${t.icon}</div>
+      <div class="info">
+        <h3>${t.name}</h3>
+        <p>${t.desc}</p>
+        <div class="chance">${chanceStr}</div>
+      </div>
+      <button class="buy" ${state.coins < t.cost ? 'disabled' : ''}>🪙 ${t.cost}</button>
+    `;
+    el.querySelector('.buy').onclick = () => buyBox(key);
+    list.appendChild(el);
+  });
+}
+function openShop() { renderShop(); document.getElementById('modalShop').classList.add('on'); }
+
+// ============================================================
+//  ПРОКАЧКА
+// ============================================================
+function renderUpgrade() {
+  const list = document.getElementById('upgradeList');
+  list.innerHTML = '';
+  if (state.cats.length === 0) {
+    list.innerHTML = '<p style="color:#f77;text-align:center">У тебя нет персиков</p>';
+    return;
+  }
+  const skin = state.skins.equipped;
+  state.cats.forEach(c => {
+    const costP = upgradeCost(c, 'power');
+    const costR = upgradeCost(c, 'resist');
+    const costL = upgradeCost(c, 'luck');
+    const el = document.createElement('div');
+    el.className = 'up-card';
+    el.innerHTML = `
+      ${catSVG(c.rarity, false, 64, skin)}
+      <div class="info">
+        <h3>${c.name} · ${RARITY[c.rarity].name} · L${c.level}</h3>
+        <div class="stats">
+          ⚔ Сила: <b>${c.power}</b><br>
+          🛡 Стойкость: <b>${c.resist}</b><br>
+          🎯 Удача: <b>${c.luck}</b>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="up-btn p" data-id="${c.id}" data-stat="power" ${state.coins < costP ? 'disabled' : ''}>⚔ +1 (🪙${costP})</button>
+        <button class="up-btn r" data-id="${c.id}" data-stat="resist" ${state.coins < costR ? 'disabled' : ''}>🛡 +1 (🪙${costR})</button>
+        <button class="up-btn l" data-id="${c.id}" data-stat="luck" ${state.coins < costL ? 'disabled' : ''}>🎯 +1 (🪙${costL})</button>
+      </div>
+    `;
+    el.querySelectorAll('.up-btn').forEach(btn => {
+      btn.onclick = () => doUpgrade(parseInt(btn.dataset.id), btn.dataset.stat);
+    });
+    list.appendChild(el);
+  });
+}
+function doUpgrade(catId, stat) {
+  const c = state.cats.find(x => x.id === catId);
+  if (!c) return;
+  const cost = upgradeCost(c, stat);
+  if (state.coins < cost) { log('💸 Не хватает монет', 'lose'); return; }
+  state.coins -= cost;
+  if (stat === 'power') c.power += 1;
+  if (stat === 'resist') c.resist += 1;
+  if (stat === 'luck') c.luck += 1;
+  sfxBuy();
+  const label = stat === 'power' ? '⚔ Сила' : stat === 'resist' ? '🛡 Стойкость' : '🎯 Удача';
+  log(`📈 ${c.name}: ${label} +1 (−${cost}🪙)`, 'win');
+  saveGame(); renderAll(); renderUpgrade();
+}
+function openUpgrade() { renderUpgrade(); document.getElementById('modalUpgrade').classList.add('on'); }
 
 // ============================================================
 //  МИКСЕР
@@ -1018,10 +1397,11 @@ function openMixer() {
   if (state.cats.length < 2) {
     grid.innerHTML = '<p style="color:#f77;grid-column:1/-1;text-align:center">Нужно минимум 2 персика</p>';
   }
+  const skin = state.skins.equipped;
   state.cats.forEach(c => {
     const el = document.createElement('div');
     el.className = 'mix-card';
-    el.innerHTML = `${catSVG(c.rarity, false, 52)}<div class="n">${c.name}</div><div class="s">★${c.rarity} · ⚔${c.power} · L${c.level}</div>`;
+    el.innerHTML = `${catSVG(c.rarity, false, 52, skin)}<div class="n">${c.name}</div><div class="s">★${c.rarity} · ⚔${c.power} · L${c.level}</div>`;
     el.onclick = () => {
       sfxClick();
       const i = mixSel.indexOf(c.id);
@@ -1047,7 +1427,7 @@ function doMix() {
   if (!a || !b) return;
   const avgRar = (a.rarity + b.rarity) / 2;
   let newRar = Math.round(avgRar);
-  if (Math.random() < 0.25) newRar = Math.min(5, newRar + 1);
+  if (Math.random() < 0.25) newRar = Math.min(6, newRar + 1);
   const child = makeCat(newRar);
   child.power = Math.floor((a.power + b.power) * 0.6) + rndI(1, 5);
   child.resist = Math.floor((a.resist + b.resist) * 0.6) + rndI(1, 3);
@@ -1056,11 +1436,12 @@ function doMix() {
   state.cats = state.cats.filter(c => c.id !== a.id && c.id !== b.id);
   state.placed = state.placed.filter(id => id !== a.id && id !== b.id);
   state.cats.push(child);
+  state.stats.mixesDone++;
   sfxWin();
-  log(`🍹 ${child.name} (${RARITY[child.rarity].name}, ⚔${child.power})`, 'win');
+  log(`🍹 ${child.name} (${RARITY[child.rarity].name}, ⚔${child.power})`, child.rarity >= 5 ? 'epic' : 'win');
+  checkAchievements();
   closeModal('modalMixer');
-  saveGame();
-  renderAll();
+  saveGame(); renderAll();
 }
 function doFeed() {
   if (mixSel.length !== 2) return;
@@ -1074,11 +1455,322 @@ function doFeed() {
   state.cats = state.cats.filter(c => c.id !== b.id);
   state.placed = state.placed.filter(id => id !== b.id);
   sfxWin();
-  log(`🍖 ${b.name} скормлен ${a.name}! +${gain} статов, L${a.level}`, 'win');
+  log(`🍖 ${b.name} скормлен ${a.name}! +${gain}, L${a.level}`, 'win');
   closeModal('modalMixer');
-  saveGame();
-  renderAll();
+  saveGame(); renderAll();
 }
+
+// ============================================================
+//  СКИНЫ
+// ============================================================
+function renderSkins() {
+  const grid = document.getElementById('skinsContent');
+  grid.innerHTML = '';
+  Object.entries(SKINS).forEach(([key, s]) => {
+    const owned = state.skins.owned.includes(key);
+    const equipped = state.skins.equipped === key;
+    const el = document.createElement('div');
+    el.className = 'skin-card' + (equipped ? ' equipped' : '');
+    el.innerHTML = `
+      <div class="preview">${catSVG(3, false, 60, key)}</div>
+      <h4>${s.name}</h4>
+      <p style="font-size:10px;color:#aaa;margin-bottom:6px">${s.desc}</p>
+      ${equipped ? '<div class="equipped-tag">✓ Надет</div>' :
+        owned ? '<div class="price" style="color:#8f8">✓ Куплен</div>' :
+        `<div class="price">🪙 ${s.cost}</div>`}
+    `;
+    el.onclick = () => {
+      sfxClick();
+      if (equipped) return;
+      if (owned) {
+        state.skins.equipped = key;
+        log(`🎨 Надет скин: ${s.name}`, 'win');
+      } else {
+        if (state.coins < s.cost) { log('💸 Не хватает монет', 'lose'); return; }
+        state.coins -= s.cost;
+        state.skins.owned.push(key);
+        state.skins.equipped = key;
+        sfxBuy();
+        log(`🎨 Куплен и надет скин: ${s.name} (−${s.cost}🪙)`, 'win');
+        checkAchievements();
+      }
+      saveGame(); renderAll(); renderSkins();
+    };
+    grid.appendChild(el);
+  });
+}
+function openSkins() { renderSkins(); document.getElementById('modalSkins').classList.add('on'); }
+
+// ============================================================
+//  АЧИВКИ UI
+// ============================================================
+function renderAchievements() {
+  const list = document.getElementById('achList');
+  list.innerHTML = '';
+  ACHIEVEMENTS.forEach(a => {
+    const unlocked = !!state.achievements[a.id];
+    const el = document.createElement('div');
+    el.className = 'ach-card' + (unlocked ? ' unlocked' : '');
+    el.innerHTML = `
+      <div class="ic">${a.icon}</div>
+      <div class="txt"><h4>${a.name}</h4><p>${a.desc}</p></div>
+    `;
+    list.appendChild(el);
+  });
+}
+function openAchievements() { renderAchievements(); document.getElementById('modalAchievements').classList.add('on'); }
+
+// ============================================================
+//  СТАТИСТИКА UI
+// ============================================================
+function renderStats() {
+  const el = document.getElementById('statsContent');
+  const s = state.stats;
+  const totalFights = s.totalWins + s.totalLosses;
+  const winrate = totalFights > 0 ? ((s.totalWins / totalFights) * 100).toFixed(1) : '—';
+  el.innerHTML = `
+    <div class="stat-grid">
+      <div class="stat-box"><div class="v">${s.totalSpins}</div><div class="l">Спинов</div></div>
+      <div class="stat-box"><div class="v">${s.totalWins}</div><div class="l">Побед</div></div>
+      <div class="stat-box"><div class="v">${s.totalLosses}</div><div class="l">Поражений</div></div>
+      <div class="stat-box"><div class="v">${winrate}%</div><div class="l">Винрейт</div></div>
+      <div class="stat-box"><div class="v">${s.bossesKilled}</div><div class="l">Боссов убито</div></div>
+      <div class="stat-box"><div class="v">${s.cyclesCompleted}</div><div class="l">Циклов</div></div>
+      <div class="stat-box"><div class="v">${s.totalCoinsEarned}</div><div class="l">Монет заработано</div></div>
+      <div class="stat-box"><div class="v">${s.mixesDone}</div><div class="l">Скрещиваний</div></div>
+      <div class="stat-box"><div class="v">${s.pvpWins}</div><div class="l">PvP побед</div></div>
+      <div class="stat-box"><div class="v">${state.cats.length}</div><div class="l">Котиков</div></div>
+      <div class="stat-box"><div class="v">${Object.keys(state.achievements).length}/${ACHIEVEMENTS.length}</div><div class="l">Ачивок</div></div>
+      <div class="stat-box"><div class="v">${state.skins.owned.length}/${Object.keys(SKINS).length}</div><div class="l">Скинов</div></div>
+    </div>
+  `;
+}
+function openStats() { renderStats(); document.getElementById('modalStats').classList.add('on'); }
+
+// ============================================================
+//  PVP — БОЙ ПО СТАТИСТИКАМ
+// ============================================================
+function encodePvp() {
+  // Берём топ-3 котика игрока и упаковываем в короткий код
+  const top = [...state.cats].sort((a, b) => {
+    const sa = a.power * RARITY[a.rarity].mult;
+    const sb = b.power * RARITY[b.rarity].mult;
+    return sb - sa;
+  }).slice(0, 3);
+  const payload = {
+    v: 1,
+    n: 'Игрок',
+    c: top.map(c => ({
+      n: c.name,
+      r: c.rarity,
+      p: c.power,
+      d: c.resist,
+      l: c.luck,
+      v: c.level,
+    })),
+  };
+  const json = JSON.stringify(payload);
+  // Base64 с юникодом
+  return btoa(unescape(encodeURIComponent(json)));
+}
+function decodePvp(code) {
+  try {
+    const clean = code.trim().replace(/\s+/g, '');
+    const json = decodeURIComponent(escape(atob(clean)));
+    const d = JSON.parse(json);
+    if (d.v !== 1 || !Array.isArray(d.c)) return null;
+    return d;
+  } catch (e) { return null; }
+}
+function calcTeamPower(team) {
+  let p = 0;
+  team.forEach(c => {
+    const m = RARITY[c.rarity].mult * (1 + (c.level - 1) * 0.2);
+    p += (c.power + c.luck * 0.5 + c.resist * 0.3) * m;
+  });
+  return p;
+}
+function openPvp() {
+  const content = document.getElementById('pvpContent');
+  content.innerHTML = `
+    <div style="background:#3a2048;border-radius:12px;padding:12px;margin-bottom:12px">
+      <div style="font-size:12px;color:#ffd76e;margin-bottom:6px;font-weight:bold">Твоя команда (топ-3 котика)</div>
+      <div id="pvpMyTeam" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"></div>
+      <div style="font-size:11px;color:#aaa;text-align:center;margin-top:8px">
+        Общая мощь: <b style="color:#ffd76e">${Math.round(calcTeamPower(state.cats.slice(0, 3).map(c => ({ rarity: c.rarity, power: c.power, luck: c.luck, resist: c.resist, level: c.level }))))}</b>
+      </div>
+    </div>
+    <div id="pvpResult"></div>
+  `;
+  const teamEl = document.getElementById('pvpMyTeam');
+  const top3 = [...state.cats].sort((a, b) => (b.power * RARITY[b.rarity].mult) - (a.power * RARITY[a.rarity].mult)).slice(0, 3);
+  if (top3.length === 0) {
+    teamEl.innerHTML = '<p style="color:#f77">Нет котиков</p>';
+  } else {
+    top3.forEach(c => {
+      const d = document.createElement('div');
+      d.style.cssText = 'background:#1e0e28;border:2px solid #6a3a7a;border-radius:10px;padding:6px;text-align:center;font-size:10px';
+      d.innerHTML = `${catSVG(c.rarity, false, 44, state.skins.equipped)}<div style="color:#ffd0e8;font-weight:bold">${c.name}</div><div style="color:#ffd76e">⚔${c.power}</div>`;
+      teamEl.appendChild(d);
+    });
+  }
+  document.getElementById('modalPvp').classList.add('on');
+}
+function createPvpCode() {
+  if (state.cats.length === 0) { toast('Нет котиков'); return; }
+  const code = encodePvp();
+  const content = document.getElementById('pvpContent');
+  content.innerHTML = `
+    <div style="background:#3a2048;border-radius:12px;padding:12px;margin-bottom:12px">
+      <div style="font-size:12px;color:#ffd76e;margin-bottom:6px;font-weight:bold">📤 Твой код вызова</div>
+      <p style="font-size:11px;color:#bbb;text-align:left;margin-bottom:8px">
+        Отправь этот код другу. Он вставит его у себя → и сразится против твоих котиков.
+      </p>
+      <textarea class="code-input" id="pvpCodeOut" readonly>${code}</textarea>
+      <button class="btn gold" id="btnCopyPvp" style="grid-column:auto;font-size:12px">📋 Скопировать</button>
+    </div>
+    <div id="pvpResult"></div>
+  `;
+  document.getElementById('btnCopyPvp').onclick = () => {
+    const ta = document.getElementById('pvpCodeOut');
+    ta.select(); ta.setSelectionRange(0, 99999);
+    try { document.execCommand('copy'); toast('✅ Скопировано'); sfxBuy(); }
+    catch (e) { toast('❌ Не удалось'); }
+  };
+}
+function enterPvpCode() {
+  const content = document.getElementById('pvpContent');
+  content.innerHTML = `
+    <div style="background:#3a2048;border-radius:12px;padding:12px;margin-bottom:12px">
+      <div style="font-size:12px;color:#ffd76e;margin-bottom:6px;font-weight:bold">📥 Введи код друга</div>
+      <textarea class="code-input" id="pvpCodeIn" placeholder="Вставь сюда код вызова..."></textarea>
+      <button class="btn pvp" id="btnFightPvp" style="width:100%">⚔️ СРАЗИТЬСЯ</button>
+    </div>
+    <div id="pvpResult"></div>
+  `;
+  document.getElementById('btnFightPvp').onclick = () => {
+    const code = document.getElementById('pvpCodeIn').value;
+    const enemy = decodePvp(code);
+    if (!enemy) { toast('❌ Неверный код'); return; }
+    fightPvp(enemy);
+  };
+}
+function fightPvp(enemy) {
+  if (state.cats.length === 0) { toast('Нет своих котиков'); return; }
+  const myTop3 = [...state.cats].sort((a, b) => (b.power * RARITY[b.rarity].mult) - (a.power * RARITY[a.rarity].mult)).slice(0, 3);
+  const myTeam = myTop3.map(c => ({ rarity: c.rarity, power: c.power, luck: c.luck, resist: c.resist, level: c.level, name: c.name }));
+  const myPower = calcTeamPower(myTeam);
+  const enemyPower = calcTeamPower(enemy.c);
+  let myChance = myPower / (myPower + enemyPower);
+  myChance = Math.max(0.05, Math.min(0.95, myChance));
+  const result = document.getElementById('pvpResult');
+  result.innerHTML = `
+    <div style="background:#3a2048;border-radius:12px;padding:12px">
+      <div style="display:flex;justify-content:space-around;font-size:11px;margin-bottom:10px">
+        <div style="text-align:center">
+          <div style="color:#8f8;font-weight:bold;margin-bottom:4px">ТЫ</div>
+          <div style="color:#ffd76e;font-size:16px;font-weight:900">${Math.round(myPower)}</div>
+        </div>
+        <div style="align-self:center;color:#ff69d8;font-size:20px;font-weight:900">VS</div>
+        <div style="text-align:center">
+          <div style="color:#f88;font-weight:bold;margin-bottom:4px">ВРАГ</div>
+          <div style="color:#ffd76e;font-size:16px;font-weight:900">${Math.round(enemyPower)}</div>
+        </div>
+      </div>
+      <div style="font-size:12px;text-align:center;color:#bbb;margin-bottom:10px">
+        Шанс победы: <b style="color:#ffd76e">${(myChance*100).toFixed(0)}%</b>
+      </div>
+      <button class="btn gold" id="btnPvpRoll" style="grid-column:auto;font-size:13px">🎰 БРОСИТЬ ВЫЗОВ</button>
+    </div>
+  `;
+  document.getElementById('btnPvpRoll').onclick = () => {
+    const win = Math.random() < myChance;
+    result.innerHTML = '';
+    if (win) {
+      sfxWin(); flash(); vibrate([40, 30, 80]);
+      const reward = 50 + Math.floor(enemyPower / 10);
+      state.coins += reward;
+      state.stats.pvpWins++;
+      state.stats.totalCoinsEarned += reward;
+      log(`⚔️ PvP победа! +${reward} 🪙`, 'win');
+      toast(`🏆 ПОБЕДА! +${reward}🪙`);
+      coinBurst(12);
+      checkAchievements();
+    } else {
+      sfxLose(); vibrate(200);
+      log(`⚔️ PvP поражение...`, 'lose');
+      toast('💀 Поражение');
+    }
+    saveGame(); renderAll();
+    const res = document.createElement('div');
+    res.style.cssText = 'text-align:center;padding:16px;font-size:20px;font-weight:900;color:' + (win ? '#8f8' : '#f88');
+    res.textContent = win ? `🏆 ПОБЕДА! +${50 + Math.floor(enemyPower/10)}🪙` : '💀 Поражение';
+    result.appendChild(res);
+  };
+}
+
+// ============================================================
+//  НАСТРОЙКИ
+// ============================================================
+function renderSettings() {
+  const el = document.getElementById('settingsContent');
+  el.innerHTML = `
+    <div class="settings-row">
+      <div><div class="label">🔊 Звук</div><div class="value">Эффекты и клики</div></div>
+      <div class="toggle ${state.soundOn ? 'on' : ''}" id="tgSound"></div>
+    </div>
+    <div class="settings-row">
+      <div><div class="label">📳 Вибрация</div><div class="value">На мобильных</div></div>
+      <div class="toggle ${state.vibrationOn ? 'on' : ''}" id="tgVib"></div>
+    </div>
+    <div class="settings-row">
+      <div><div class="label">📤 Экспорт сейва</div><div class="value">Скопировать в буфер</div></div>
+      <button class="btn alt" id="btnExport" style="padding:6px 10px;font-size:11px">Копировать</button>
+    </div>
+    <div class="settings-row">
+      <div><div class="label">📥 Импорт сейва</div><div class="value">Вставить из буфера</div></div>
+      <button class="btn alt" id="btnImport" style="padding:6px 10px;font-size:11px">Вставить</button>
+    </div>
+    <div class="settings-row" style="border-color:#a03030">
+      <div><div class="label" style="color:#f88">🗑 Сброс прогресса</div><div class="value">Всё удалится</div></div>
+      <button class="btn" id="btnHardReset" style="padding:6px 10px;font-size:11px;background:linear-gradient(180deg,#ff8888,#a03030);color:#fff;box-shadow:0 3px 0 #501010">Сбросить</button>
+    </div>
+    <div style="font-size:10px;color:#666;text-align:center;margin-top:10px">
+      Версия v6 · Оффлайн-режим · Данные хранятся только у тебя в браузере
+    </div>
+  `;
+  document.getElementById('tgSound').onclick = () => {
+    state.soundOn = !state.soundOn;
+    saveGame(); renderSettings();
+    if (state.soundOn) sfxClick();
+  };
+  document.getElementById('tgVib').onclick = () => {
+    state.vibrationOn = !state.vibrationOn;
+    saveGame(); renderSettings();
+    if (state.vibrationOn) vibrate(50);
+  };
+  document.getElementById('btnExport').onclick = () => {
+    try {
+      const raw = localStorage.getItem(SAVE_KEY);
+      const ta = document.createElement('textarea');
+      ta.value = raw; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); ta.remove();
+      toast('✅ Сейв скопирован');
+    } catch (e) { toast('❌ Ошибка'); }
+  };
+  document.getElementById('btnImport').onclick = async () => {
+    try {
+      const txt = await navigator.clipboard.readText();
+      if (!txt || !txt.startsWith('{')) { toast('❌ Неверный формат'); return; }
+      JSON.parse(txt); // проверка
+      localStorage.setItem(SAVE_KEY, txt);
+      toast('✅ Загружено, перезагружаем...');
+      setTimeout(() => location.reload(), 800);
+    } catch (e) { toast('❌ Не удалось прочитать'); }
+  };
+  document.getElementById('btnHardReset').onclick = resetGame;
+}
+function openSettings() { renderSettings(); document.getElementById('modalSettings').classList.add('on'); }
 
 // ============================================================
 //  ПРОДАЖА
@@ -1087,32 +1779,68 @@ function sellUnplaced() {
   const toSell = state.cats.filter(c => !state.placed.includes(c.id));
   if (toSell.length === 0) { log('💤 Нечего продавать'); return; }
   let sum = 0;
-  toSell.forEach(c => sum += c.rarity * 10 + c.power);
+  toSell.forEach(c => sum += c.rarity * 10 + c.power + c.resist + c.luck);
   state.cats = state.cats.filter(c => state.placed.includes(c.id));
   state.coins += sum;
+  state.stats.totalCoinsEarned += sum;
   sfxWin();
   log(`💰 Продано ${toSell.length} за ${sum} 🪙`, 'win');
-  saveGame();
-  renderAll();
+  checkAchievements();
+  saveGame(); renderAll();
+}
+
+// ============================================================
+//  ЕЖЕДНЕВНЫЙ БОНУС
+// ============================================================
+function checkDailyBonus() {
+  const now = Date.now();
+  const DAY = 24 * 60 * 60 * 1000;
+  if (now - state.lastDailyBonus >= DAY) {
+    const bonus = 100, boxesBonus = 2;
+    state.coins += bonus; state.boxes += boxesBonus;
+    state.stats.totalCoinsEarned += bonus;
+    state.lastDailyBonus = now;
+    saveGame();
+    setTimeout(() => {
+      toast(`🎁 Ежедневный бонус: +${bonus}🪙 +${boxesBonus}📦`);
+      log(`🎁 Ежедневный бонус! +${bonus}🪙 +${boxesBonus}📦`, 'epic');
+    }, 500);
+  }
 }
 
 // ============================================================
 //  КНОПКИ
 // ============================================================
 document.getElementById('btnSpin').onclick = doFight;
-document.getElementById('btnBoxes').onclick = () => {
-  const n = state.boxes;
-  for (let i = 0; i < n; i++) openBox();
-};
+document.getElementById('btnShop').onclick = () => { sfxClick(); openShop(); };
+document.getElementById('btnUpgrade').onclick = () => { sfxClick(); openUpgrade(); };
 document.getElementById('btnMixer').onclick = () => { sfxClick(); openMixer(); };
+document.getElementById('btnBoxes').onclick = openStockBoxes;
+document.getElementById('btnPvp').onclick = () => { sfxClick(); openPvp(); };
+document.getElementById('btnSkins').onclick = () => { sfxClick(); openSkins(); };
+document.getElementById('btnAchievements').onclick = () => { sfxClick(); openAchievements(); };
+document.getElementById('btnStats').onclick = () => { sfxClick(); openStats(); };
+document.getElementById('btnSettings').onclick = () => { sfxClick(); openSettings(); };
 document.getElementById('btnSell').onclick = sellUnplaced;
 document.getElementById('btnMix').onclick = doMix;
 document.getElementById('btnFeed').onclick = doFeed;
-document.getElementById('btnCloseMixer').onclick = () => { sfxClick(); closeModal('modalMixer'); };
+document.getElementById('btnCloseMixer').onclick = () => closeModal('modalMixer');
+document.getElementById('btnCloseShop').onclick = () => closeModal('modalShop');
+document.getElementById('btnCloseUpgrade').onclick = () => closeModal('modalUpgrade');
+document.getElementById('btnCloseAch').onclick = () => closeModal('modalAchievements');
+document.getElementById('btnCloseStats').onclick = () => closeModal('modalStats');
+document.getElementById('btnCloseSkins').onclick = () => closeModal('modalSkins');
+document.getElementById('btnClosePvp').onclick = () => closeModal('modalPvp');
+document.getElementById('btnCloseSettings').onclick = () => closeModal('modalSettings');
+document.getElementById('btnCreatePvp').onclick = createPvpCode;
+document.getElementById('btnEnterPvp').onclick = enterPvpCode;
 document.getElementById('resetBtn').onclick = resetGame;
+
 document.addEventListener('keydown', e => {
   if (e.key === 's' || e.key === 'ы') sellUnplaced();
-  if (e.key === 'Escape') closeModal('modalMixer');
+  if (e.key === 'Escape') {
+    ['modalMixer','modalShop','modalUpgrade','modalAchievements','modalStats','modalSkins','modalPvp','modalSettings'].forEach(closeModal);
+  }
 });
 
 // ============================================================
@@ -1126,24 +1854,21 @@ function init() {
   log('🍑 Добро пожаловать!', 'boss');
   log('Тапни котика внизу — поставить на поле (макс 3).');
   log('Тапни шиповника — выбрать цель.');
-  log('Прогресс сохраняется автоматически 💾');
+  log('🏪 Магазин · 📈 Прокачка · 🧪 Миксер · ⚔️ PvP');
+  log('💾 Прогресс сохраняется автоматически');
   renderAll();
 }
 const loaded = loadGame();
 if (!loaded) init();
 else { log('💾 Прогресс загружен', 'win'); renderAll(); }
 
-// Сохранение при закрытии
+checkDailyBonus();
+
 window.addEventListener('beforeunload', saveGame);
 document.addEventListener('visibilitychange', () => { if (document.hidden) saveGame(); });
-
-// Активация звука по первому тапу (iOS требует user gesture)
 document.addEventListener('touchstart', () => { ac(); }, { once: true });
 document.addEventListener('click', () => { ac(); }, { once: true });
 
-// ============================================================
-//  РЕГИСТРАЦИЯ SERVICE WORKER
-// ============================================================
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW fail', e));
