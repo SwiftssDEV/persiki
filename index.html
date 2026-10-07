@@ -286,6 +286,7 @@
     box-shadow: 0 20px 60px #000, 0 0 60px #ff8ec844, inset 0 1px 0 #ffffff22;
     animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     -webkit-overflow-scrolling: touch;
+    position: relative;
   }
   @keyframes popIn {
     from { transform: scale(0.85); opacity: 0; }
@@ -295,8 +296,25 @@
     color: #ffd76e; margin-bottom: 10px;
     text-shadow: 0 0 15px #ffd76e88;
     letter-spacing: 1px; text-align: center; font-size: 18px;
+    padding-right: 30px;
   }
   .modal-box p { font-size: 12px; color: #bbb; margin-bottom: 12px; text-align: center; }
+
+  /* Встроенный крестик — всегда сверху справа */
+  .modal-close {
+    position: absolute; top: 10px; right: 10px;
+    width: 32px; height: 32px;
+    background: linear-gradient(180deg, #ff9ecc, #d05090);
+    border: 2px solid #ffd0e8;
+    border-radius: 50%;
+    color: #2a0820; font-weight: 900; font-size: 16px;
+    cursor: pointer; z-index: 5;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px #0008, inset 0 1px 0 #ffffff88;
+    touch-action: manipulation;
+  }
+  .modal-close:active { transform: scale(0.9); }
+
   .mix-grid {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(94px, 1fr));
     gap: 8px; margin-bottom: 12px;
@@ -337,7 +355,7 @@
   }
   .shop-item .icon.rare { background: radial-gradient(circle, #a8d8ff 0%, #3060c0 100%); border-color: #b0e0ff; }
   .shop-item .icon.myth { background: radial-gradient(circle, #e0b0ff 0%, #7030c0 100%); border-color: #e0c0ff; }
-  .shop-item .info { flex: 1; }
+  .shop-item .info { flex: 1; min-width: 0; }
   .shop-item .info h3 { font-size: 14px; color: #ffd76e; margin-bottom: 2px; }
   .shop-item .info p { font-size: 11px; color: #ccc; margin-bottom: 6px; }
   .shop-item .info .chance { font-size: 10px; color: #8f8; }
@@ -567,62 +585,63 @@
 
 <div class="modal" id="modalShop">
   <div class="modal-box">
+    <button class="modal-close" data-close="modalShop">✕</button>
     <h2>🏪 МАГАЗИН</h2>
     <p>Авоськи за монеты — внутри случайный персик</p>
     <div id="shopList"></div>
-    <div class="row"><button class="btn" id="btnCloseShop" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
   </div>
 </div>
 
 <div class="modal" id="modalUpgrade">
   <div class="modal-box">
+    <button class="modal-close" data-close="modalUpgrade">✕</button>
     <h2>📈 ПРОКАЧКА</h2>
     <p>Трать монеты на усиление котиков</p>
     <div id="upgradeList"></div>
-    <div class="row"><button class="btn" id="btnCloseUpgrade" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
   </div>
 </div>
 
 <div class="modal" id="modalMixer">
   <div class="modal-box">
+    <button class="modal-close" data-close="modalMixer">✕</button>
     <h2>🧪 МИКСЕР</h2>
     <p>Выбери двух персиков — смешать или скормить</p>
     <div id="mixGrid" class="mix-grid"></div>
     <div class="row">
       <button class="btn gold" id="btnMix" disabled style="grid-column:auto;font-size:12px;">🍹 Смешать</button>
       <button class="btn alt" id="btnFeed" disabled>🍖 Скормить</button>
-      <button class="btn" id="btnCloseMixer" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">✕</button>
     </div>
   </div>
 </div>
 
 <div class="modal" id="modalAchievements">
   <div class="modal-box">
+    <button class="modal-close" data-close="modalAchievements">✕</button>
     <h2>🏆 ДОСТИЖЕНИЯ</h2>
     <div id="achList"></div>
-    <div class="row"><button class="btn" id="btnCloseAch" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
   </div>
 </div>
 
 <div class="modal" id="modalStats">
   <div class="modal-box">
+    <button class="modal-close" data-close="modalStats">✕</button>
     <h2>📊 СТАТИСТИКА</h2>
     <div id="statsContent"></div>
-    <div class="row"><button class="btn" id="btnCloseStats" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
   </div>
 </div>
 
 <div class="modal" id="modalSkins">
   <div class="modal-box">
+    <button class="modal-close" data-close="modalSkins">✕</button>
     <h2>🎨 СКИНЫ</h2>
     <p>Меняют внешний вид всех твоих котиков</p>
     <div id="skinsContent" class="skin-grid"></div>
-    <div class="row"><button class="btn" id="btnCloseSkins" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
   </div>
 </div>
 
 <div class="modal" id="modalPvp">
   <div class="modal-box">
+    <button class="modal-close" data-close="modalPvp">✕</button>
     <h2>⚔️ PVP АРЕНА</h2>
     <p>Бой по статистикам — отправь код другу или вставь его код</p>
     <div id="pvpContent"></div>
@@ -630,15 +649,14 @@
       <button class="btn pvp" id="btnCreatePvp">🎫 Создать вызов</button>
       <button class="btn alt" id="btnEnterPvp">📥 Ввести код</button>
     </div>
-    <div class="row" style="margin-top:8px;"><button class="btn" id="btnClosePvp" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
   </div>
 </div>
 
 <div class="modal" id="modalSettings">
   <div class="modal-box">
+    <button class="modal-close" data-close="modalSettings">✕</button>
     <h2>⚙️ НАСТРОЙКИ</h2>
     <div id="settingsContent"></div>
-    <div class="row"><button class="btn" id="btnCloseSettings" style="background:linear-gradient(180deg,#c0c0c0,#606060);color:#fff;box-shadow:0 3px 0 #333;">Закрыть</button></div>
   </div>
 </div>
 
@@ -677,7 +695,7 @@ const CAT_PALETTES = {
 };
 
 function catSVG(rarity = 1, boss = false, size = 96, skin = null) {
-  const p = { ...(CAT_PALETTES[rarity] || CAT_PALETTES[1]) };
+  const p = Object.assign({}, CAT_PALETTES[rarity] || CAT_PALETTES[1]);
   if (skin === 'pirate') { p.fur = '#8a6040'; p.fur2 = '#5a3020'; p.ears = '#7a5030'; }
   if (skin === 'ninja') { p.fur = '#2a2a3a'; p.fur2 = '#101018'; p.ears = '#1a1a2a'; p.inner = '#404050'; }
   if (skin === 'wizard') { p.fur = '#6a4a9a'; p.fur2 = '#3a2050'; p.ears = '#5a3a8a'; p.inner = '#a080d0'; }
@@ -716,21 +734,10 @@ function catSVG(rarity = 1, boss = false, size = 96, skin = null) {
   <path d="M55 53 Q58 57 61 55" fill="none" stroke="#4a2030" stroke-width="1.2" stroke-linecap="round"/>
   <ellipse cx="42" cy="92" rx="8" ry="5" fill="${p.fur}" stroke="${p.fur2}" stroke-width="1.5"/>
   <ellipse cx="68" cy="92" rx="8" ry="5" fill="${p.fur}" stroke="${p.fur2}" stroke-width="1.5"/>
-  ${skin === 'pirate' ? `
-  <path d="M30 40 Q55 20 80 40 L80 44 Q55 26 30 44 Z" fill="#202030" stroke="#000" stroke-width="1.5"/>
-  <circle cx="55" cy="42" r="6" fill="#000"/>
-  ` : ''}
-  ${skin === 'ninja' ? `
-  <path d="M25 40 Q55 30 85 40 L85 50 Q55 42 25 50 Z" fill="#1a1a2a" stroke="#000" stroke-width="1.5"/>
-  ` : ''}
-  ${skin === 'wizard' ? `
-  <path d="M55 5 L45 40 L65 40 Z" fill="#4a2a8a" stroke="#2a1060" stroke-width="1.5"/>
-  <ellipse cx="55" cy="40" rx="22" ry="5" fill="#4a2a8a" stroke="#2a1060" stroke-width="1.5"/>
-  ` : ''}
-  ${boss ? `
-  <g transform="translate(55,10)">
-    <path d="M-18 6 L-14 -6 L-6 0 L0 -10 L6 0 L14 -6 L18 6 Z" fill="#ffd76e" stroke="#a07020" stroke-width="1.5"/>
-  </g>` : ''}
+  ${skin === 'pirate' ? `<path d="M30 40 Q55 20 80 40 L80 44 Q55 26 30 44 Z" fill="#202030" stroke="#000" stroke-width="1.5"/><circle cx="55" cy="42" r="6" fill="#000"/>` : ''}
+  ${skin === 'ninja' ? `<path d="M25 40 Q55 30 85 40 L85 50 Q55 42 25 50 Z" fill="#1a1a2a" stroke="#000" stroke-width="1.5"/>` : ''}
+  ${skin === 'wizard' ? `<path d="M55 5 L45 40 L65 40 Z" fill="#4a2a8a" stroke="#2a1060" stroke-width="1.5"/><ellipse cx="55" cy="40" rx="22" ry="5" fill="#4a2a8a" stroke="#2a1060" stroke-width="1.5"/>` : ''}
+  ${boss ? `<g transform="translate(55,10)"><path d="M-18 6 L-14 -6 L-6 0 L0 -10 L6 0 L14 -6 L18 6 Z" fill="#ffd76e" stroke="#a07020" stroke-width="1.5"/></g>` : ''}
 </svg>`;
 }
 
@@ -844,12 +851,12 @@ const pick = a => a[rndI(0, a.length - 1)];
 let _id = 0;
 function pickRarityByChances(chances) {
   const r = Math.random(); let acc = 0;
-  for (const [rar, ch] of Object.entries(chances)) {
-    acc += ch; if (r < acc) return parseInt(rar);
+  for (const key of Object.keys(chances)) {
+    acc += chances[key]; if (r < acc) return parseInt(key);
   }
   return 1;
 }
-function makeCat(rarity = null) {
+function makeCat(rarity) {
   const r = rarity || pickRarityByChances(BOX_TYPES.basic.chances);
   const base = 5 * r;
   return {
@@ -858,13 +865,13 @@ function makeCat(rarity = null) {
     luck: rndI(1, base), level: 1,
   };
 }
-function makeThorn(boss = false) {
+function makeThorn(boss) {
   const cycle = state.cycle;
   const scale = 1 + cycle * 0.15;
   const base = boss ? rndI(30, 45) : rndI(8, 20);
   const hpMax = boss ? rndI(80, 120) : rndI(30, 60);
   return {
-    id: ++_id, name: boss ? 'БОСС' : 'Шиповник', boss,
+    id: ++_id, name: boss ? 'БОСС' : 'Шиповник', boss: !!boss,
     power: Math.floor(base * scale),
     spike: Math.floor((boss ? rndI(3,6) : rndI(1,4)) * scale),
     reward: boss ? rndI(80, 150) : rndI(15, 35),
@@ -882,17 +889,31 @@ function upgradeCost(cat, stat) {
 //  СОСТОЯНИЕ
 // ============================================================
 const SAVE_KEY = 'persiki_save_v3';
-let state = {
-  cats: [], thorns: [], placed: [], chosenThorn: null,
-  coins: 50, glasses: 0, boxes: 3, cycle: 0,
-  rolling: false, idCounter: 0,
-  lastDailyBonus: 0,
-  achievements: {},
-  stats: { totalSpins:0, totalWins:0, totalLosses:0, bossesKilled:0, totalCoinsEarned:0, mixesDone:0, cyclesCompleted:0, pvpWins:0 },
-  skins: { owned: ['default'], equipped: 'default' },
-  soundOn: true,
-  vibrationOn: true,
-};
+function defaultState() {
+  return {
+    cats: [], thorns: [], placed: [], chosenThorn: null,
+    coins: 50, glasses: 0, boxes: 3, cycle: 0,
+    rolling: false, lastDailyBonus: 0,
+    achievements: {},
+    stats: { totalSpins:0, totalWins:0, totalLosses:0, bossesKilled:0, totalCoinsEarned:0, mixesDone:0, cyclesCompleted:0, pvpWins:0 },
+    skins: { owned: ['default'], equipped: 'default' },
+    soundOn: true, vibrationOn: true,
+  };
+}
+let state = defaultState();
+
+function safeStats(s) {
+  const base = defaultState().stats;
+  if (!s || typeof s !== 'object') return base;
+  return Object.assign(base, s);
+}
+function safeSkins(s) {
+  const base = { owned: ['default'], equipped: 'default' };
+  if (!s || typeof s !== 'object') return base;
+  if (!Array.isArray(s.owned) || !s.owned.includes('default')) s.owned = ['default'];
+  if (!s.equipped || !s.owned.includes(s.equipped)) s.equipped = 'default';
+  return s;
+}
 
 function saveGame() {
   try {
@@ -910,6 +931,7 @@ function saveGame() {
 let saveTimer = null;
 function showSaveIndicator() {
   const el = document.getElementById('saveIndicator');
+  if (!el) return;
   el.classList.add('on');
   clearTimeout(saveTimer);
   saveTimer = setTimeout(() => el.classList.remove('on'), 800);
@@ -919,42 +941,49 @@ function loadGame() {
     const raw = localStorage.getItem(SAVE_KEY);
     if (!raw) return false;
     const d = JSON.parse(raw);
-    state.cats = d.cats || [];
-    state.thorns = d.thorns || [];
-    state.placed = d.placed || [];
+    state.cats = Array.isArray(d.cats) ? d.cats : [];
+    state.thorns = Array.isArray(d.thorns) ? d.thorns : [];
+    state.placed = Array.isArray(d.placed) ? d.placed : [];
     state.chosenThorn = d.chosenThorn || null;
-    state.coins = d.coins ?? 50;
-    state.glasses = d.glasses ?? 0;
-    state.boxes = d.boxes ?? 3;
-    state.cycle = d.cycle ?? 0;
-    state.lastDailyBonus = d.lastDailyBonus ?? 0;
-    state.achievements = d.achievements || {};
-    state.stats = Object.assign({ totalSpins:0, totalWins:0, totalLosses:0, bossesKilled:0, totalCoinsEarned:0, mixesDone:0, cyclesCompleted:0, pvpWins:0 }, d.stats || {});
-    state.skins = d.skins || { owned: ['default'], equipped: 'default' };
-    state.soundOn = d.soundOn ?? true;
-    state.vibrationOn = d.vibrationOn ?? true;
+    state.coins = typeof d.coins === 'number' ? d.coins : 50;
+    state.glasses = typeof d.glasses === 'number' ? d.glasses : 0;
+    state.boxes = typeof d.boxes === 'number' ? d.boxes : 3;
+    state.cycle = typeof d.cycle === 'number' ? d.cycle : 0;
+    state.lastDailyBonus = d.lastDailyBonus || 0;
+    state.achievements = d.achievements && typeof d.achievements === 'object' ? d.achievements : {};
+    state.stats = safeStats(d.stats);
+    state.skins = safeSkins(d.skins);
+    state.soundOn = d.soundOn !== false;
+    state.vibrationOn = d.vibrationOn !== false;
     _id = d.idCounter || 0;
+
+    // Самолечение: если шиповников нет — новый цикл
     if (state.thorns.length === 0) {
       state.cycle++;
       const isBoss = state.cycle % 5 === 0;
       const count = isBoss ? 1 : rndI(2, 3);
       for (let i = 0; i < count; i++) state.thorns.push(makeThorn(isBoss));
     }
+    // Самолечение: у шиповников должно быть hp
+    state.thorns.forEach(t => {
+      if (typeof t.hp !== 'number') t.hp = t.hpMax;
+      if (typeof t.hpMax !== 'number') t.hpMax = t.hp || 40;
+    });
+    // Самолечение: у котиков должны быть числовые поля
+    state.cats.forEach(c => {
+      if (typeof c.power !== 'number') c.power = 5;
+      if (typeof c.resist !== 'number') c.resist = 5;
+      if (typeof c.luck !== 'number') c.luck = 1;
+      if (typeof c.level !== 'number') c.level = 1;
+      if (typeof c.rarity !== 'number') c.rarity = 1;
+    });
     return true;
   } catch (e) { console.warn('Load fail', e); return false; }
 }
 function resetGame() {
   if (!confirm('Сбросить ВЕСЬ прогресс? Это нельзя отменить.')) return;
   localStorage.removeItem(SAVE_KEY);
-  state = {
-    cats: [], thorns: [], placed: [], chosenThorn: null,
-    coins: 50, glasses: 0, boxes: 3, cycle: 0,
-    rolling: false, idCounter: 0, lastDailyBonus: 0,
-    achievements: {},
-    stats: { totalSpins:0, totalWins:0, totalLosses:0, bossesKilled:0, totalCoinsEarned:0, mixesDone:0, cyclesCompleted:0, pvpWins:0 },
-    skins: { owned: ['default'], equipped: 'default' },
-    soundOn: true, vibrationOn: true,
-  };
+  state = defaultState();
   _id = 0;
   document.getElementById('log').innerHTML = '';
   init();
@@ -969,12 +998,13 @@ function ac() {
   if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} }
   return audioCtx;
 }
-function beep(f, d, t = 'square', v = 0.05) {
+function beep(f, d, t, v) {
   if (!state.soundOn) return;
   const c = ac(); if (!c) return;
   const o = c.createOscillator(); const g = c.createGain();
-  o.type = t; o.frequency.value = f;
-  g.gain.setValueAtTime(v, c.currentTime);
+  o.type = t || 'square'; o.frequency.value = f;
+  const vol = v || 0.05;
+  g.gain.setValueAtTime(vol, c.currentTime);
   g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + d);
   o.connect(g); g.connect(c.destination);
   o.start(); o.stop(c.currentTime + d);
@@ -995,9 +1025,9 @@ function sfxBuy() { beep(600, 0.06); setTimeout(() => beep(900, 0.08), 60); setT
 function vibrate(ms) { if (state.vibrationOn && navigator.vibrate) navigator.vibrate(ms); }
 
 // ============================================================
-//  УТИЛИТЫ UI
+//  UI
 // ============================================================
-function log(msg, cls = '') {
+function log(msg, cls) {
   const el = document.getElementById('log');
   const d = document.createElement('div');
   if (cls) d.className = cls;
@@ -1016,7 +1046,8 @@ function flash() {
   const f = document.getElementById('flash');
   f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
 }
-function coinBurst(n = 8) {
+function coinBurst(n) {
+  n = n || 8;
   const rect = document.getElementById('rouletteWrap').getBoundingClientRect();
   const cx = rect.left + rect.width / 2;
   const cy = rect.top + rect.height / 2;
@@ -1041,30 +1072,32 @@ function unlockAch(id) {
   state.achievements[id] = Date.now();
   const a = ACHIEVEMENTS.find(x => x.id === id);
   if (a) {
-    log(`🏆 Достижение: ${a.name} — ${a.desc}`, 'ach');
-    toast(`🏆 ${a.name}`);
+    log('🏆 Достижение: ' + a.name + ' — ' + a.desc, 'ach');
+    toast('🏆 ' + a.name);
     sfxWin();
   }
   saveGame();
 }
 function checkAchievements() {
-  if (state.cats.length >= 1) unlockAch('first_cat');
-  if (state.stats.totalWins >= 1) unlockAch('first_win');
-  if (state.stats.totalWins >= 10) unlockAch('wins_10');
-  if (state.stats.totalWins >= 50) unlockAch('wins_50');
-  if (state.stats.totalWins >= 100) unlockAch('wins_100');
-  if (state.stats.bossesKilled >= 1) unlockAch('first_boss');
-  if (state.stats.bossesKilled >= 5) unlockAch('bosses_5');
-  if (state.cats.some(c => c.rarity >= 5)) unlockAch('legendary');
-  if (state.cats.some(c => c.rarity >= 6)) unlockAch('divine');
-  if (state.stats.totalCoinsEarned >= 1000) unlockAch('rich_1000');
-  if (state.stats.totalCoinsEarned >= 10000) unlockAch('rich_10000');
-  if (state.cats.length >= 10) unlockAch('cats_10');
-  if (state.cats.length >= 25) unlockAch('cats_25');
-  if (state.stats.mixesDone >= 5) unlockAch('mix_5');
-  if (state.stats.cyclesCompleted >= 10) unlockAch('cycle_10');
-  if (state.stats.pvpWins >= 1) unlockAch('pvp_win');
-  if (state.skins.owned.length >= 3) unlockAch('skins_3');
+  try {
+    if (state.cats.length >= 1) unlockAch('first_cat');
+    if (state.stats.totalWins >= 1) unlockAch('first_win');
+    if (state.stats.totalWins >= 10) unlockAch('wins_10');
+    if (state.stats.totalWins >= 50) unlockAch('wins_50');
+    if (state.stats.totalWins >= 100) unlockAch('wins_100');
+    if (state.stats.bossesKilled >= 1) unlockAch('first_boss');
+    if (state.stats.bossesKilled >= 5) unlockAch('bosses_5');
+    if (state.cats.some(c => c.rarity >= 5)) unlockAch('legendary');
+    if (state.cats.some(c => c.rarity >= 6)) unlockAch('divine');
+    if (state.stats.totalCoinsEarned >= 1000) unlockAch('rich_1000');
+    if (state.stats.totalCoinsEarned >= 10000) unlockAch('rich_10000');
+    if (state.cats.length >= 10) unlockAch('cats_10');
+    if (state.cats.length >= 25) unlockAch('cats_25');
+    if (state.stats.mixesDone >= 5) unlockAch('mix_5');
+    if (state.stats.cyclesCompleted >= 10) unlockAch('cycle_10');
+    if (state.stats.pvpWins >= 1) unlockAch('pvp_win');
+    if (state.skins.owned.length >= 3) unlockAch('skins_3');
+  } catch (e) { console.warn(e); }
 }
 
 // ============================================================
@@ -1080,7 +1113,7 @@ function renderTop() {
 function starsHTML(rar) {
   let h = '<div class="stars">';
   for (let i = 0; i < rar; i++) {
-    h += `<span class="star"><svg viewBox="0 0 20 20"><path d="M10 1 L12.5 7 L19 7.5 L14 11.5 L15.5 18 L10 14.5 L4.5 18 L6 11.5 L1 7.5 L7.5 7 Z" fill="currentColor" stroke="#000" stroke-width="0.8"/></svg></span>`;
+    h += '<span class="star"><svg viewBox="0 0 20 20"><path d="M10 1 L12.5 7 L19 7.5 L14 11.5 L15.5 18 L10 14.5 L4.5 18 L6 11.5 L1 7.5 L7.5 7 Z" fill="currentColor" stroke="#000" stroke-width="0.8"/></svg></span>';
   }
   return h + '</div>';
 }
@@ -1088,10 +1121,11 @@ function renderField() {
   const f = document.getElementById('field');
   f.innerHTML = '';
   const skin = state.skins.equipped;
-  state.cats.filter(c => state.placed.includes(c.id)).forEach(c => {
+  state.cats.filter(c => state.placed.indexOf(c.id) >= 0).forEach(c => {
     const el = document.createElement('div');
     el.className = 'char r' + c.rarity;
-    el.innerHTML = `${starsHTML(c.rarity)}${catSVG(c.rarity, false, 96, skin)}<div class="nameplate">${c.name} <span class="lvl">L${c.level}</span> · ⚔${c.power}</div>`;
+    el.innerHTML = starsHTML(c.rarity) + catSVG(c.rarity, false, 96, skin) +
+      '<div class="nameplate">' + c.name + ' <span class="lvl">L' + c.level + '</span> · ⚔' + c.power + '</div>';
     el.onclick = () => { sfxClick(); togglePlace(c.id); };
     f.appendChild(el);
   });
@@ -1099,7 +1133,9 @@ function renderField() {
     const el = document.createElement('div');
     el.className = 'char r' + (t.boss ? 5 : 2);
     const hpPct = (t.hp / t.hpMax) * 100;
-    el.innerHTML = `<div class="hpbar"><div class="hpbar-fill" style="width:${hpPct}%"></div></div>${thornSVG(t.boss, 96)}<div class="nameplate">${t.boss ? '👑 ' : ''}${t.name} · ⚔${t.power}</div>`;
+    el.innerHTML = '<div class="hpbar"><div class="hpbar-fill" style="width:' + hpPct + '%"></div></div>' +
+      thornSVG(t.boss, 96) +
+      '<div class="nameplate">' + (t.boss ? '👑 ' : '') + t.name + ' · ⚔' + t.power + '</div>';
     if (state.chosenThorn === t.id) el.classList.add('selected');
     el.onclick = () => { sfxClick(); state.chosenThorn = t.id; saveGame(); renderField(); };
     f.appendChild(el);
@@ -1111,16 +1147,19 @@ function renderInventory() {
   const skin = state.skins.equipped;
   state.cats.forEach(c => {
     const el = document.createElement('div');
-    el.className = 'inv-item' + (state.placed.includes(c.id) ? ' placed' : '');
-    el.innerHTML = `${catSVG(c.rarity, false, 28, skin)}<div>${c.name}<div class="tag">★${c.rarity} · ⚔${c.power}</div></div>`;
+    el.className = 'inv-item' + (state.placed.indexOf(c.id) >= 0 ? ' placed' : '');
+    el.innerHTML = catSVG(c.rarity, false, 28, skin) +
+      '<div>' + c.name + '<div class="tag">★' + c.rarity + ' · ⚔' + c.power + '</div></div>';
     el.onclick = () => { sfxClick(); togglePlace(c.id); };
     bar.appendChild(el);
   });
 }
 function renderBottom() {
-  document.getElementById('btnSpin').disabled = state.rolling || state.placed.length === 0 || !state.chosenThorn;
-  document.getElementById('btnBoxes').disabled = state.boxes <= 0;
-  document.getElementById('btnBoxes').textContent = `📦 Откр(${state.boxes})`;
+  const btn = document.getElementById('btnSpin');
+  btn.disabled = state.rolling || state.placed.length === 0 || !state.chosenThorn;
+  const bb = document.getElementById('btnBoxes');
+  bb.disabled = state.boxes <= 0;
+  bb.textContent = '📦 Откр(' + state.boxes + ')';
 }
 function renderAll() { renderTop(); renderField(); renderInventory(); renderBottom(); }
 
@@ -1144,27 +1183,30 @@ function buildRoulette(winChance) {
   for (let i = 0; i < 20; i++) slots.push(i < winCount ? 'win' : 'lose');
   for (let i = slots.length - 1; i > 0; i--) {
     const j = rndI(0, i);
-    [slots[i], slots[j]] = [slots[j], slots[i]];
+    const tmp = slots[i]; slots[i] = slots[j]; slots[j] = tmp;
   }
   return slots;
 }
 function spinRoulette(winChance, onDone) {
   const roulette = document.getElementById('roulette');
   const slots = buildRoulette(winChance);
-  roulette.innerHTML = slots.map(s => `<div class="slot ${s}">${s === 'win' ? slotPeachSVG() : slotThornSVG()}</div>`).join('');
+  roulette.innerHTML = slots.map(s =>
+    '<div class="slot ' + s + '">' + (s === 'win' ? slotPeachSVG() : slotThornSVG()) + '</div>'
+  ).join('');
   const slotW = 80;
   const wrapW = document.getElementById('rouletteWrap').clientWidth;
   const centerOffset = wrapW / 2 - slotW / 2;
   const targetWin = Math.random() < winChance;
-  let candidates = slots.map((s, i) => ({ s, i })).filter(o => (targetWin ? o.s === 'win' : o.s === 'lose'));
-  if (candidates.length === 0) candidates = slots.map((s, i) => ({ s, i }));
+  let candidates = [];
+  slots.forEach((s, i) => { if ((targetWin && s === 'win') || (!targetWin && s === 'lose')) candidates.push({ s: s, i: i }); });
+  if (candidates.length === 0) slots.forEach((s, i) => candidates.push({ s: s, i: i }));
   const chosen = candidates[rndI(0, candidates.length - 1)];
   const offset = chosen.i * slotW;
   roulette.style.transition = 'none';
-  roulette.style.transform = `translateX(0px)`;
+  roulette.style.transform = 'translateX(0px)';
   void roulette.offsetWidth;
   roulette.style.transition = 'transform 4.2s cubic-bezier(0.12, 0.85, 0.2, 1)';
-  roulette.style.transform = `translateX(${centerOffset - offset}px)`;
+  roulette.style.transform = 'translateX(' + (centerOffset - offset) + 'px)';
   sfxSpin();
   vibrate(30);
   setTimeout(() => onDone(targetWin), 4300);
@@ -1176,11 +1218,11 @@ function spinRoulette(winChance, onDone) {
 function calcWinChance() {
   const thorn = state.thorns.find(t => t.id === state.chosenThorn);
   if (!thorn) return 0;
-  const cats = state.cats.filter(c => state.placed.includes(c.id));
-  let power = 0, resist = 0, luck = 0;
+  const cats = state.cats.filter(c => state.placed.indexOf(c.id) >= 0);
+  let power = 0, luck = 0;
   cats.forEach(c => {
     const m = RARITY[c.rarity].mult * (1 + (c.level - 1) * 0.2);
-    power += c.power * m; resist += c.resist * m; luck += c.luck * m;
+    power += c.power * m; luck += c.luck * m;
   });
   const eff = power + luck * 0.5;
   const enemyEff = thorn.power + thorn.spike * 2;
@@ -1202,7 +1244,7 @@ function doFight() {
   if (!thorn) return;
   state.rolling = true; renderBottom();
   const chance = calcWinChance();
-  log(`🎰 Крутим... шанс победы ${(chance*100).toFixed(0)}%`);
+  log('🎰 Крутим... шанс победы ' + (chance*100).toFixed(0) + '%');
   state.stats.totalSpins++;
   spinRoulette(chance, (win) => {
     state.rolling = false;
@@ -1219,33 +1261,30 @@ function doFight() {
         const fill = thornEl.querySelector('.hpbar-fill');
         if (fill) fill.style.width = (thorn.hp / thorn.hpMax * 100) + '%';
       }
-      setTimeout(() => thornEl && thornEl.classList.remove('shake'), 400);
+      setTimeout(() => { if (thornEl) thornEl.classList.remove('shake'); }, 400);
       if (thorn.hp <= 0) {
-        log(`✅ ${thorn.name} побеждён! +${thorn.reward} 🪙${thorn.glass ? ` +${thorn.glass} 🥤` : ''}`, 'win');
+        log('✅ ' + thorn.name + ' побеждён! +' + thorn.reward + ' 🪙' + (thorn.glass ? ' +' + thorn.glass + ' 🥤' : ''), 'win');
         state.coins += thorn.reward;
         state.glasses += thorn.glass;
         state.stats.totalWins++;
         state.stats.totalCoinsEarned += thorn.reward;
-        if (thorn.boss) {
-          state.stats.bossesKilled++;
-          toast('👑 БОСС ПОБЕЖДЁН!');
-        }
+        if (thorn.boss) { state.stats.bossesKilled++; toast('👑 БОСС ПОБЕЖДЁН!'); }
         state.thorns = state.thorns.filter(t => t.id !== thorn.id);
         state.chosenThorn = null;
         coinBurst(thorn.boss ? 16 : 8);
         if (state.thorns.length === 0) nextCycle();
       } else {
-        log(`⚔️ Удар! ${thorn.name} -${dmgVal} HP (${thorn.hp}/${thorn.hpMax})`, 'win');
+        log('⚔️ Удар! ' + thorn.name + ' -' + dmgVal + ' HP (' + thorn.hp + '/' + thorn.hpMax + ')', 'win');
       }
     } else {
       sfxLose(); vibrate(200);
       state.stats.totalLosses++;
-      log(`❌ Промах... персики отброшены`, 'lose');
+      log('❌ Промах... персики отброшены', 'lose');
       if (Math.random() < 0.25 && state.placed.length > 0) {
         const lostId = state.placed[rndI(0, state.placed.length - 1)];
         const idx = state.cats.findIndex(c => c.id === lostId);
         if (idx >= 0) {
-          log(`💀 ${state.cats[idx].name} убежал с поля`, 'lose');
+          log('💀 ' + state.cats[idx].name + ' убежал с поля', 'lose');
           state.placed.splice(state.placed.indexOf(lostId), 1);
         }
       }
@@ -1258,7 +1297,7 @@ function nextCycle() {
   state.cycle++;
   state.stats.cyclesCompleted++;
   const isBoss = state.cycle % 5 === 0;
-  log(`🔄 Цикл ${state.cycle}${isBoss ? ' — БОССФАЙТ! 👑' : ''}`, isBoss ? 'boss' : '');
+  log('🔄 Цикл ' + state.cycle + (isBoss ? ' — БОССФАЙТ! 👑' : ''), isBoss ? 'boss' : '');
   state.thorns = [];
   const count = isBoss ? 1 : rndI(2, 3);
   for (let i = 0; i < count; i++) state.thorns.push(makeThorn(isBoss));
@@ -1278,9 +1317,9 @@ function openBoxByType(typeKey) {
   state.cats.push(c);
   sfxWin();
   const cls = rarity >= 5 ? 'epic' : rarity >= 4 ? 'win' : '';
-  log(`📦 ${t.name}: ${c.name} (${RARITY[rarity].name}, ⚔${c.power})`, cls);
-  if (rarity >= 5) toast(`✨ ${RARITY[rarity].name}! ${c.name}`);
-  else if (rarity >= 4) toast(`⭐ ${RARITY[rarity].name}!`);
+  log('📦 ' + t.name + ': ' + c.name + ' (' + RARITY[rarity].name + ', ⚔' + c.power + ')', cls);
+  if (rarity >= 5) toast('✨ ' + RARITY[rarity].name + '! ' + c.name);
+  else if (rarity >= 4) toast('⭐ ' + RARITY[rarity].name + '!');
   checkAchievements();
   saveGame(); renderAll();
 }
@@ -1294,10 +1333,10 @@ function openStockBoxes() {
 function buyBox(typeKey) {
   const t = BOX_TYPES[typeKey];
   if (!t) return;
-  if (state.coins < t.cost) { log(`💸 Не хватает монет на ${t.name}`, 'lose'); vibrate(100); return; }
+  if (state.coins < t.cost) { log('💸 Не хватает монет на ' + t.name, 'lose'); vibrate(100); return; }
   state.coins -= t.cost;
   sfxBuy();
-  log(`🛒 Куплена ${t.name} за ${t.cost} 🪙`, 'win');
+  log('🛒 Куплена ' + t.name + ' за ' + t.cost + ' 🪙', 'win');
   openBoxByType(typeKey);
   renderAll();
   renderShop();
@@ -1309,22 +1348,22 @@ function buyBox(typeKey) {
 function renderShop() {
   const list = document.getElementById('shopList');
   list.innerHTML = '';
-  Object.entries(BOX_TYPES).forEach(([key, t]) => {
+  Object.keys(BOX_TYPES).forEach(key => {
+    const t = BOX_TYPES[key];
     const el = document.createElement('div');
     el.className = 'shop-item';
-    const chanceStr = Object.entries(t.chances)
-      .filter(([_, ch]) => ch > 0)
-      .map(([rar, ch]) => `${'★'.repeat(parseInt(rar))} ${(ch*100).toFixed(1)}%`)
+    const chanceStr = Object.keys(t.chances)
+      .filter(k => t.chances[k] > 0)
+      .map(k => '★'.repeat(parseInt(k)) + ' ' + (t.chances[k]*100).toFixed(1) + '%')
       .join(' · ');
-    el.innerHTML = `
-      <div class="icon ${t.cls}">${t.icon}</div>
-      <div class="info">
-        <h3>${t.name}</h3>
-        <p>${t.desc}</p>
-        <div class="chance">${chanceStr}</div>
-      </div>
-      <button class="buy" ${state.coins < t.cost ? 'disabled' : ''}>🪙 ${t.cost}</button>
-    `;
+    el.innerHTML =
+      '<div class="icon ' + t.cls + '">' + t.icon + '</div>' +
+      '<div class="info">' +
+        '<h3>' + t.name + '</h3>' +
+        '<p>' + t.desc + '</p>' +
+        '<div class="chance">' + chanceStr + '</div>' +
+      '</div>' +
+      '<button class="buy"' + (state.coins < t.cost ? ' disabled' : '') + '>🪙 ' + t.cost + '</button>';
     el.querySelector('.buy').onclick = () => buyBox(key);
     list.appendChild(el);
   });
@@ -1348,22 +1387,17 @@ function renderUpgrade() {
     const costL = upgradeCost(c, 'luck');
     const el = document.createElement('div');
     el.className = 'up-card';
-    el.innerHTML = `
-      ${catSVG(c.rarity, false, 64, skin)}
-      <div class="info">
-        <h3>${c.name} · ${RARITY[c.rarity].name} · L${c.level}</h3>
-        <div class="stats">
-          ⚔ Сила: <b>${c.power}</b><br>
-          🛡 Стойкость: <b>${c.resist}</b><br>
-          🎯 Удача: <b>${c.luck}</b>
-        </div>
-      </div>
-      <div class="actions">
-        <button class="up-btn p" data-id="${c.id}" data-stat="power" ${state.coins < costP ? 'disabled' : ''}>⚔ +1 (🪙${costP})</button>
-        <button class="up-btn r" data-id="${c.id}" data-stat="resist" ${state.coins < costR ? 'disabled' : ''}>🛡 +1 (🪙${costR})</button>
-        <button class="up-btn l" data-id="${c.id}" data-stat="luck" ${state.coins < costL ? 'disabled' : ''}>🎯 +1 (🪙${costL})</button>
-      </div>
-    `;
+    el.innerHTML =
+      catSVG(c.rarity, false, 64, skin) +
+      '<div class="info">' +
+        '<h3>' + c.name + ' · ' + RARITY[c.rarity].name + ' · L' + c.level + '</h3>' +
+        '<div class="stats">⚔ Сила: <b>' + c.power + '</b><br>🛡 Стойкость: <b>' + c.resist + '</b><br>🎯 Удача: <b>' + c.luck + '</b></div>' +
+      '</div>' +
+      '<div class="actions">' +
+        '<button class="up-btn p" data-id="' + c.id + '" data-stat="power"' + (state.coins < costP ? ' disabled' : '') + '>⚔ +1 (🪙' + costP + ')</button>' +
+        '<button class="up-btn r" data-id="' + c.id + '" data-stat="resist"' + (state.coins < costR ? ' disabled' : '') + '>🛡 +1 (🪙' + costR + ')</button>' +
+        '<button class="up-btn l" data-id="' + c.id + '" data-stat="luck"' + (state.coins < costL ? ' disabled' : '') + '>🎯 +1 (🪙' + costL + ')</button>' +
+      '</div>';
     el.querySelectorAll('.up-btn').forEach(btn => {
       btn.onclick = () => doUpgrade(parseInt(btn.dataset.id), btn.dataset.stat);
     });
@@ -1381,7 +1415,7 @@ function doUpgrade(catId, stat) {
   if (stat === 'luck') c.luck += 1;
   sfxBuy();
   const label = stat === 'power' ? '⚔ Сила' : stat === 'resist' ? '🛡 Стойкость' : '🎯 Удача';
-  log(`📈 ${c.name}: ${label} +1 (−${cost}🪙)`, 'win');
+  log('📈 ' + c.name + ': ' + label + ' +1 (−' + cost + '🪙)', 'win');
   saveGame(); renderAll(); renderUpgrade();
 }
 function openUpgrade() { renderUpgrade(); document.getElementById('modalUpgrade').classList.add('on'); }
@@ -1401,7 +1435,8 @@ function openMixer() {
   state.cats.forEach(c => {
     const el = document.createElement('div');
     el.className = 'mix-card';
-    el.innerHTML = `${catSVG(c.rarity, false, 52, skin)}<div class="n">${c.name}</div><div class="s">★${c.rarity} · ⚔${c.power} · L${c.level}</div>`;
+    el.innerHTML = catSVG(c.rarity, false, 52, skin) +
+      '<div class="n">' + c.name + '</div><div class="s">★' + c.rarity + ' · ⚔' + c.power + ' · L' + c.level + '</div>';
     el.onclick = () => {
       sfxClick();
       const i = mixSel.indexOf(c.id);
@@ -1409,7 +1444,7 @@ function openMixer() {
       else if (mixSel.length < 2) mixSel.push(c.id);
       else { mixSel.shift(); mixSel.push(c.id); }
       grid.querySelectorAll('.mix-card').forEach((n, idx) => {
-        n.classList.toggle('sel', mixSel.includes(state.cats[idx].id));
+        n.classList.toggle('sel', mixSel.indexOf(state.cats[idx].id) >= 0);
       });
       document.getElementById('btnMix').disabled = mixSel.length !== 2;
       document.getElementById('btnFeed').disabled = mixSel.length !== 2;
@@ -1420,10 +1455,14 @@ function openMixer() {
   document.getElementById('btnFeed').disabled = true;
   document.getElementById('modalMixer').classList.add('on');
 }
-function closeModal(id) { document.getElementById(id).classList.remove('on'); }
+function closeModal(id) {
+  const m = document.getElementById(id);
+  if (m) m.classList.remove('on');
+}
 function doMix() {
   if (mixSel.length !== 2) return;
-  const [a, b] = mixSel.map(id => state.cats.find(c => c.id === id));
+  const a = state.cats.find(c => c.id === mixSel[0]);
+  const b = state.cats.find(c => c.id === mixSel[1]);
   if (!a || !b) return;
   const avgRar = (a.rarity + b.rarity) / 2;
   let newRar = Math.round(avgRar);
@@ -1438,14 +1477,15 @@ function doMix() {
   state.cats.push(child);
   state.stats.mixesDone++;
   sfxWin();
-  log(`🍹 ${child.name} (${RARITY[child.rarity].name}, ⚔${child.power})`, child.rarity >= 5 ? 'epic' : 'win');
+  log('🍹 ' + child.name + ' (' + RARITY[child.rarity].name + ', ⚔' + child.power + ')', child.rarity >= 5 ? 'epic' : 'win');
   checkAchievements();
   closeModal('modalMixer');
   saveGame(); renderAll();
 }
 function doFeed() {
   if (mixSel.length !== 2) return;
-  const [a, b] = mixSel.map(id => state.cats.find(c => c.id === id));
+  const a = state.cats.find(c => c.id === mixSel[0]);
+  const b = state.cats.find(c => c.id === mixSel[1]);
   if (!a || !b) return;
   const gain = Math.floor((b.power + b.resist + b.luck) * 0.5);
   a.level++;
@@ -1455,7 +1495,7 @@ function doFeed() {
   state.cats = state.cats.filter(c => c.id !== b.id);
   state.placed = state.placed.filter(id => id !== b.id);
   sfxWin();
-  log(`🍖 ${b.name} скормлен ${a.name}! +${gain}, L${a.level}`, 'win');
+  log('🍖 ' + b.name + ' скормлен ' + a.name + '! +' + gain + ', L' + a.level, 'win');
   closeModal('modalMixer');
   saveGame(); renderAll();
 }
@@ -1466,32 +1506,32 @@ function doFeed() {
 function renderSkins() {
   const grid = document.getElementById('skinsContent');
   grid.innerHTML = '';
-  Object.entries(SKINS).forEach(([key, s]) => {
-    const owned = state.skins.owned.includes(key);
+  Object.keys(SKINS).forEach(key => {
+    const s = SKINS[key];
+    const owned = state.skins.owned.indexOf(key) >= 0;
     const equipped = state.skins.equipped === key;
     const el = document.createElement('div');
     el.className = 'skin-card' + (equipped ? ' equipped' : '');
-    el.innerHTML = `
-      <div class="preview">${catSVG(3, false, 60, key)}</div>
-      <h4>${s.name}</h4>
-      <p style="font-size:10px;color:#aaa;margin-bottom:6px">${s.desc}</p>
-      ${equipped ? '<div class="equipped-tag">✓ Надет</div>' :
+    el.innerHTML =
+      '<div class="preview">' + catSVG(3, false, 60, key) + '</div>' +
+      '<h4>' + s.name + '</h4>' +
+      '<p style="font-size:10px;color:#aaa;margin-bottom:6px">' + s.desc + '</p>' +
+      (equipped ? '<div class="equipped-tag">✓ Надет</div>' :
         owned ? '<div class="price" style="color:#8f8">✓ Куплен</div>' :
-        `<div class="price">🪙 ${s.cost}</div>`}
-    `;
+        '<div class="price">🪙 ' + s.cost + '</div>');
     el.onclick = () => {
       sfxClick();
       if (equipped) return;
       if (owned) {
         state.skins.equipped = key;
-        log(`🎨 Надет скин: ${s.name}`, 'win');
+        log('🎨 Надет скин: ' + s.name, 'win');
       } else {
         if (state.coins < s.cost) { log('💸 Не хватает монет', 'lose'); return; }
         state.coins -= s.cost;
         state.skins.owned.push(key);
         state.skins.equipped = key;
         sfxBuy();
-        log(`🎨 Куплен и надет скин: ${s.name} (−${s.cost}🪙)`, 'win');
+        log('🎨 Куплен и надет скин: ' + s.name + ' (−' + s.cost + '🪙)', 'win');
         checkAchievements();
       }
       saveGame(); renderAll(); renderSkins();
@@ -1511,67 +1551,49 @@ function renderAchievements() {
     const unlocked = !!state.achievements[a.id];
     const el = document.createElement('div');
     el.className = 'ach-card' + (unlocked ? ' unlocked' : '');
-    el.innerHTML = `
-      <div class="ic">${a.icon}</div>
-      <div class="txt"><h4>${a.name}</h4><p>${a.desc}</p></div>
-    `;
+    el.innerHTML = '<div class="ic">' + a.icon + '</div>' +
+      '<div class="txt"><h4>' + a.name + '</h4><p>' + a.desc + '</p></div>';
     list.appendChild(el);
   });
 }
 function openAchievements() { renderAchievements(); document.getElementById('modalAchievements').classList.add('on'); }
 
 // ============================================================
-//  СТАТИСТИКА UI
+//  СТАТИСТИКА
 // ============================================================
 function renderStats() {
   const el = document.getElementById('statsContent');
   const s = state.stats;
   const totalFights = s.totalWins + s.totalLosses;
   const winrate = totalFights > 0 ? ((s.totalWins / totalFights) * 100).toFixed(1) : '—';
-  el.innerHTML = `
-    <div class="stat-grid">
-      <div class="stat-box"><div class="v">${s.totalSpins}</div><div class="l">Спинов</div></div>
-      <div class="stat-box"><div class="v">${s.totalWins}</div><div class="l">Побед</div></div>
-      <div class="stat-box"><div class="v">${s.totalLosses}</div><div class="l">Поражений</div></div>
-      <div class="stat-box"><div class="v">${winrate}%</div><div class="l">Винрейт</div></div>
-      <div class="stat-box"><div class="v">${s.bossesKilled}</div><div class="l">Боссов убито</div></div>
-      <div class="stat-box"><div class="v">${s.cyclesCompleted}</div><div class="l">Циклов</div></div>
-      <div class="stat-box"><div class="v">${s.totalCoinsEarned}</div><div class="l">Монет заработано</div></div>
-      <div class="stat-box"><div class="v">${s.mixesDone}</div><div class="l">Скрещиваний</div></div>
-      <div class="stat-box"><div class="v">${s.pvpWins}</div><div class="l">PvP побед</div></div>
-      <div class="stat-box"><div class="v">${state.cats.length}</div><div class="l">Котиков</div></div>
-      <div class="stat-box"><div class="v">${Object.keys(state.achievements).length}/${ACHIEVEMENTS.length}</div><div class="l">Ачивок</div></div>
-      <div class="stat-box"><div class="v">${state.skins.owned.length}/${Object.keys(SKINS).length}</div><div class="l">Скинов</div></div>
-    </div>
-  `;
+  el.innerHTML =
+    '<div class="stat-grid">' +
+      '<div class="stat-box"><div class="v">' + s.totalSpins + '</div><div class="l">Спинов</div></div>' +
+      '<div class="stat-box"><div class="v">' + s.totalWins + '</div><div class="l">Побед</div></div>' +
+      '<div class="stat-box"><div class="v">' + s.totalLosses + '</div><div class="l">Поражений</div></div>' +
+      '<div class="stat-box"><div class="v">' + winrate + '%</div><div class="l">Винрейт</div></div>' +
+      '<div class="stat-box"><div class="v">' + s.bossesKilled + '</div><div class="l">Боссов</div></div>' +
+      '<div class="stat-box"><div class="v">' + s.cyclesCompleted + '</div><div class="l">Циклов</div></div>' +
+      '<div class="stat-box"><div class="v">' + s.totalCoinsEarned + '</div><div class="l">Монет</div></div>' +
+      '<div class="stat-box"><div class="v">' + s.mixesDone + '</div><div class="l">Миксов</div></div>' +
+      '<div class="stat-box"><div class="v">' + s.pvpWins + '</div><div class="l">PvP побед</div></div>' +
+      '<div class="stat-box"><div class="v">' + state.cats.length + '</div><div class="l">Котиков</div></div>' +
+      '<div class="stat-box"><div class="v">' + Object.keys(state.achievements).length + '/' + ACHIEVEMENTS.length + '</div><div class="l">Ачивок</div></div>' +
+      '<div class="stat-box"><div class="v">' + state.skins.owned.length + '/' + Object.keys(SKINS).length + '</div><div class="l">Скинов</div></div>' +
+    '</div>';
 }
 function openStats() { renderStats(); document.getElementById('modalStats').classList.add('on'); }
 
 // ============================================================
-//  PVP — БОЙ ПО СТАТИСТИКАМ
+//  PVP
 // ============================================================
 function encodePvp() {
-  // Берём топ-3 котика игрока и упаковываем в короткий код
-  const top = [...state.cats].sort((a, b) => {
-    const sa = a.power * RARITY[a.rarity].mult;
-    const sb = b.power * RARITY[b.rarity].mult;
-    return sb - sa;
-  }).slice(0, 3);
+  const top = state.cats.slice().sort((a, b) => (b.power * RARITY[b.rarity].mult) - (a.power * RARITY[a.rarity].mult)).slice(0, 3);
   const payload = {
-    v: 1,
-    n: 'Игрок',
-    c: top.map(c => ({
-      n: c.name,
-      r: c.rarity,
-      p: c.power,
-      d: c.resist,
-      l: c.luck,
-      v: c.level,
-    })),
+    v: 1, n: 'Игрок',
+    c: top.map(c => ({ n: c.name, r: c.rarity, p: c.power, d: c.resist, l: c.luck, v: c.level })),
   };
-  const json = JSON.stringify(payload);
-  // Base64 с юникодом
-  return btoa(unescape(encodeURIComponent(json)));
+  return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
 }
 function decodePvp(code) {
   try {
@@ -1592,45 +1614,36 @@ function calcTeamPower(team) {
 }
 function openPvp() {
   const content = document.getElementById('pvpContent');
-  content.innerHTML = `
-    <div style="background:#3a2048;border-radius:12px;padding:12px;margin-bottom:12px">
-      <div style="font-size:12px;color:#ffd76e;margin-bottom:6px;font-weight:bold">Твоя команда (топ-3 котика)</div>
-      <div id="pvpMyTeam" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"></div>
-      <div style="font-size:11px;color:#aaa;text-align:center;margin-top:8px">
-        Общая мощь: <b style="color:#ffd76e">${Math.round(calcTeamPower(state.cats.slice(0, 3).map(c => ({ rarity: c.rarity, power: c.power, luck: c.luck, resist: c.resist, level: c.level }))))}</b>
-      </div>
-    </div>
-    <div id="pvpResult"></div>
-  `;
-  const teamEl = document.getElementById('pvpMyTeam');
-  const top3 = [...state.cats].sort((a, b) => (b.power * RARITY[b.rarity].mult) - (a.power * RARITY[a.rarity].mult)).slice(0, 3);
-  if (top3.length === 0) {
-    teamEl.innerHTML = '<p style="color:#f77">Нет котиков</p>';
-  } else {
-    top3.forEach(c => {
-      const d = document.createElement('div');
-      d.style.cssText = 'background:#1e0e28;border:2px solid #6a3a7a;border-radius:10px;padding:6px;text-align:center;font-size:10px';
-      d.innerHTML = `${catSVG(c.rarity, false, 44, state.skins.equipped)}<div style="color:#ffd0e8;font-weight:bold">${c.name}</div><div style="color:#ffd76e">⚔${c.power}</div>`;
-      teamEl.appendChild(d);
-    });
-  }
+  const top3 = state.cats.slice().sort((a, b) => (b.power * RARITY[b.rarity].mult) - (a.power * RARITY[a.rarity].mult)).slice(0, 3);
+  const skin = state.skins.equipped;
+  let teamHtml = '';
+  if (top3.length === 0) teamHtml = '<p style="color:#f77">Нет котиков</p>';
+  else top3.forEach(c => {
+    teamHtml += '<div style="background:#1e0e28;border:2px solid #6a3a7a;border-radius:10px;padding:6px;text-align:center;font-size:10px">' +
+      catSVG(c.rarity, false, 44, skin) +
+      '<div style="color:#ffd0e8;font-weight:bold">' + c.name + '</div>' +
+      '<div style="color:#ffd76e">⚔' + c.power + '</div></div>';
+  });
+  content.innerHTML =
+    '<div style="background:#3a2048;border-radius:12px;padding:12px;margin-bottom:12px">' +
+      '<div style="font-size:12px;color:#ffd76e;margin-bottom:6px;font-weight:bold">Твоя команда (топ-3)</div>' +
+      '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">' + teamHtml + '</div>' +
+    '</div>' +
+    '<div id="pvpResult"></div>';
   document.getElementById('modalPvp').classList.add('on');
 }
 function createPvpCode() {
   if (state.cats.length === 0) { toast('Нет котиков'); return; }
   const code = encodePvp();
   const content = document.getElementById('pvpContent');
-  content.innerHTML = `
-    <div style="background:#3a2048;border-radius:12px;padding:12px;margin-bottom:12px">
-      <div style="font-size:12px;color:#ffd76e;margin-bottom:6px;font-weight:bold">📤 Твой код вызова</div>
-      <p style="font-size:11px;color:#bbb;text-align:left;margin-bottom:8px">
-        Отправь этот код другу. Он вставит его у себя → и сразится против твоих котиков.
-      </p>
-      <textarea class="code-input" id="pvpCodeOut" readonly>${code}</textarea>
-      <button class="btn gold" id="btnCopyPvp" style="grid-column:auto;font-size:12px">📋 Скопировать</button>
-    </div>
-    <div id="pvpResult"></div>
-  `;
+  content.innerHTML =
+    '<div style="background:#3a2048;border-radius:12px;padding:12px;margin-bottom:12px">' +
+      '<div style="font-size:12px;color:#ffd76e;margin-bottom:6px;font-weight:bold">📤 Твой код вызова</div>' +
+      '<p style="font-size:11px;color:#bbb;text-align:left;margin-bottom:8px">Отправь этот код другу. Он вставит его у себя → и сразится против твоих котиков.</p>' +
+      '<textarea class="code-input" id="pvpCodeOut" readonly>' + code + '</textarea>' +
+      '<button class="btn gold" id="btnCopyPvp" style="grid-column:auto;font-size:12px">📋 Скопировать</button>' +
+    '</div>' +
+    '<div id="pvpResult"></div>';
   document.getElementById('btnCopyPvp').onclick = () => {
     const ta = document.getElementById('pvpCodeOut');
     ta.select(); ta.setSelectionRange(0, 99999);
@@ -1640,14 +1653,13 @@ function createPvpCode() {
 }
 function enterPvpCode() {
   const content = document.getElementById('pvpContent');
-  content.innerHTML = `
-    <div style="background:#3a2048;border-radius:12px;padding:12px;margin-bottom:12px">
-      <div style="font-size:12px;color:#ffd76e;margin-bottom:6px;font-weight:bold">📥 Введи код друга</div>
-      <textarea class="code-input" id="pvpCodeIn" placeholder="Вставь сюда код вызова..."></textarea>
-      <button class="btn pvp" id="btnFightPvp" style="width:100%">⚔️ СРАЗИТЬСЯ</button>
-    </div>
-    <div id="pvpResult"></div>
-  `;
+  content.innerHTML =
+    '<div style="background:#3a2048;border-radius:12px;padding:12px;margin-bottom:12px">' +
+      '<div style="font-size:12px;color:#ffd76e;margin-bottom:6px;font-weight:bold">📥 Введи код друга</div>' +
+      '<textarea class="code-input" id="pvpCodeIn" placeholder="Вставь сюда код вызова..."></textarea>' +
+      '<button class="btn pvp" id="btnFightPvp" style="width:100%">⚔️ СРАЗИТЬСЯ</button>' +
+    '</div>' +
+    '<div id="pvpResult"></div>';
   document.getElementById('btnFightPvp').onclick = () => {
     const code = document.getElementById('pvpCodeIn').value;
     const enemy = decodePvp(code);
@@ -1657,32 +1669,23 @@ function enterPvpCode() {
 }
 function fightPvp(enemy) {
   if (state.cats.length === 0) { toast('Нет своих котиков'); return; }
-  const myTop3 = [...state.cats].sort((a, b) => (b.power * RARITY[b.rarity].mult) - (a.power * RARITY[a.rarity].mult)).slice(0, 3);
+  const myTop3 = state.cats.slice().sort((a, b) => (b.power * RARITY[b.rarity].mult) - (a.power * RARITY[a.rarity].mult)).slice(0, 3);
   const myTeam = myTop3.map(c => ({ rarity: c.rarity, power: c.power, luck: c.luck, resist: c.resist, level: c.level, name: c.name }));
   const myPower = calcTeamPower(myTeam);
   const enemyPower = calcTeamPower(enemy.c);
   let myChance = myPower / (myPower + enemyPower);
   myChance = Math.max(0.05, Math.min(0.95, myChance));
   const result = document.getElementById('pvpResult');
-  result.innerHTML = `
-    <div style="background:#3a2048;border-radius:12px;padding:12px">
-      <div style="display:flex;justify-content:space-around;font-size:11px;margin-bottom:10px">
-        <div style="text-align:center">
-          <div style="color:#8f8;font-weight:bold;margin-bottom:4px">ТЫ</div>
-          <div style="color:#ffd76e;font-size:16px;font-weight:900">${Math.round(myPower)}</div>
-        </div>
-        <div style="align-self:center;color:#ff69d8;font-size:20px;font-weight:900">VS</div>
-        <div style="text-align:center">
-          <div style="color:#f88;font-weight:bold;margin-bottom:4px">ВРАГ</div>
-          <div style="color:#ffd76e;font-size:16px;font-weight:900">${Math.round(enemyPower)}</div>
-        </div>
-      </div>
-      <div style="font-size:12px;text-align:center;color:#bbb;margin-bottom:10px">
-        Шанс победы: <b style="color:#ffd76e">${(myChance*100).toFixed(0)}%</b>
-      </div>
-      <button class="btn gold" id="btnPvpRoll" style="grid-column:auto;font-size:13px">🎰 БРОСИТЬ ВЫЗОВ</button>
-    </div>
-  `;
+  result.innerHTML =
+    '<div style="background:#3a2048;border-radius:12px;padding:12px">' +
+      '<div style="display:flex;justify-content:space-around;font-size:11px;margin-bottom:10px">' +
+        '<div style="text-align:center"><div style="color:#8f8;font-weight:bold;margin-bottom:4px">ТЫ</div><div style="color:#ffd76e;font-size:16px;font-weight:900">' + Math.round(myPower) + '</div></div>' +
+        '<div style="align-self:center;color:#ff69d8;font-size:20px;font-weight:900">VS</div>' +
+        '<div style="text-align:center"><div style="color:#f88;font-weight:bold;margin-bottom:4px">ВРАГ</div><div style="color:#ffd76e;font-size:16px;font-weight:900">' + Math.round(enemyPower) + '</div></div>' +
+      '</div>' +
+      '<div style="font-size:12px;text-align:center;color:#bbb;margin-bottom:10px">Шанс победы: <b style="color:#ffd76e">' + (myChance*100).toFixed(0) + '%</b></div>' +
+      '<button class="btn gold" id="btnPvpRoll" style="grid-column:auto;font-size:13px">🎰 БРОСИТЬ ВЫЗОВ</button>' +
+    '</div>';
   document.getElementById('btnPvpRoll').onclick = () => {
     const win = Math.random() < myChance;
     result.innerHTML = '';
@@ -1692,19 +1695,19 @@ function fightPvp(enemy) {
       state.coins += reward;
       state.stats.pvpWins++;
       state.stats.totalCoinsEarned += reward;
-      log(`⚔️ PvP победа! +${reward} 🪙`, 'win');
-      toast(`🏆 ПОБЕДА! +${reward}🪙`);
+      log('⚔️ PvP победа! +' + reward + ' 🪙', 'win');
+      toast('🏆 ПОБЕДА! +' + reward + '🪙');
       coinBurst(12);
       checkAchievements();
     } else {
       sfxLose(); vibrate(200);
-      log(`⚔️ PvP поражение...`, 'lose');
+      log('⚔️ PvP поражение...', 'lose');
       toast('💀 Поражение');
     }
     saveGame(); renderAll();
     const res = document.createElement('div');
     res.style.cssText = 'text-align:center;padding:16px;font-size:20px;font-weight:900;color:' + (win ? '#8f8' : '#f88');
-    res.textContent = win ? `🏆 ПОБЕДА! +${50 + Math.floor(enemyPower/10)}🪙` : '💀 Поражение';
+    res.textContent = win ? '🏆 ПОБЕДА!' : '💀 Поражение';
     result.appendChild(res);
   };
 }
@@ -1714,41 +1717,15 @@ function fightPvp(enemy) {
 // ============================================================
 function renderSettings() {
   const el = document.getElementById('settingsContent');
-  el.innerHTML = `
-    <div class="settings-row">
-      <div><div class="label">🔊 Звук</div><div class="value">Эффекты и клики</div></div>
-      <div class="toggle ${state.soundOn ? 'on' : ''}" id="tgSound"></div>
-    </div>
-    <div class="settings-row">
-      <div><div class="label">📳 Вибрация</div><div class="value">На мобильных</div></div>
-      <div class="toggle ${state.vibrationOn ? 'on' : ''}" id="tgVib"></div>
-    </div>
-    <div class="settings-row">
-      <div><div class="label">📤 Экспорт сейва</div><div class="value">Скопировать в буфер</div></div>
-      <button class="btn alt" id="btnExport" style="padding:6px 10px;font-size:11px">Копировать</button>
-    </div>
-    <div class="settings-row">
-      <div><div class="label">📥 Импорт сейва</div><div class="value">Вставить из буфера</div></div>
-      <button class="btn alt" id="btnImport" style="padding:6px 10px;font-size:11px">Вставить</button>
-    </div>
-    <div class="settings-row" style="border-color:#a03030">
-      <div><div class="label" style="color:#f88">🗑 Сброс прогресса</div><div class="value">Всё удалится</div></div>
-      <button class="btn" id="btnHardReset" style="padding:6px 10px;font-size:11px;background:linear-gradient(180deg,#ff8888,#a03030);color:#fff;box-shadow:0 3px 0 #501010">Сбросить</button>
-    </div>
-    <div style="font-size:10px;color:#666;text-align:center;margin-top:10px">
-      Версия v6 · Оффлайн-режим · Данные хранятся только у тебя в браузере
-    </div>
-  `;
-  document.getElementById('tgSound').onclick = () => {
-    state.soundOn = !state.soundOn;
-    saveGame(); renderSettings();
-    if (state.soundOn) sfxClick();
-  };
-  document.getElementById('tgVib').onclick = () => {
-    state.vibrationOn = !state.vibrationOn;
-    saveGame(); renderSettings();
-    if (state.vibrationOn) vibrate(50);
-  };
+  el.innerHTML =
+    '<div class="settings-row"><div><div class="label">🔊 Звук</div><div class="value">Эффекты и клики</div></div><div class="toggle ' + (state.soundOn ? 'on' : '') + '" id="tgSound"></div></div>' +
+    '<div class="settings-row"><div><div class="label">📳 Вибрация</div><div class="value">На мобильных</div></div><div class="toggle ' + (state.vibrationOn ? 'on' : '') + '" id="tgVib"></div></div>' +
+    '<div class="settings-row"><div><div class="label">📤 Экспорт сейва</div><div class="value">Скопировать в буфер</div></div><button class="btn alt" id="btnExport" style="padding:6px 10px;font-size:11px">Копировать</button></div>' +
+    '<div class="settings-row"><div><div class="label">📥 Импорт сейва</div><div class="value">Вставить из буфера</div></div><button class="btn alt" id="btnImport" style="padding:6px 10px;font-size:11px">Вставить</button></div>' +
+    '<div class="settings-row" style="border-color:#a03030"><div><div class="label" style="color:#f88">🗑 Сброс</div><div class="value">Всё удалится</div></div><button class="btn" id="btnHardReset" style="padding:6px 10px;font-size:11px;background:linear-gradient(180deg,#ff8888,#a03030);color:#fff;box-shadow:0 3px 0 #501010">Сбросить</button></div>' +
+    '<div style="font-size:10px;color:#666;text-align:center;margin-top:10px">v6 · Оффлайн · Данные только у тебя</div>';
+  document.getElementById('tgSound').onclick = () => { state.soundOn = !state.soundOn; saveGame(); renderSettings(); if (state.soundOn) sfxClick(); };
+  document.getElementById('tgVib').onclick = () => { state.vibrationOn = !state.vibrationOn; saveGame(); renderSettings(); if (state.vibrationOn) vibrate(50); };
   document.getElementById('btnExport').onclick = () => {
     try {
       const raw = localStorage.getItem(SAVE_KEY);
@@ -1758,15 +1735,15 @@ function renderSettings() {
       toast('✅ Сейв скопирован');
     } catch (e) { toast('❌ Ошибка'); }
   };
-  document.getElementById('btnImport').onclick = async () => {
+  document.getElementById('btnImport').onclick = () => {
+    const txt = prompt('Вставь строку сейва:');
+    if (!txt) return;
     try {
-      const txt = await navigator.clipboard.readText();
-      if (!txt || !txt.startsWith('{')) { toast('❌ Неверный формат'); return; }
-      JSON.parse(txt); // проверка
+      JSON.parse(txt);
       localStorage.setItem(SAVE_KEY, txt);
       toast('✅ Загружено, перезагружаем...');
       setTimeout(() => location.reload(), 800);
-    } catch (e) { toast('❌ Не удалось прочитать'); }
+    } catch (e) { toast('❌ Неверный формат'); }
   };
   document.getElementById('btnHardReset').onclick = resetGame;
 }
@@ -1776,15 +1753,15 @@ function openSettings() { renderSettings(); document.getElementById('modalSettin
 //  ПРОДАЖА
 // ============================================================
 function sellUnplaced() {
-  const toSell = state.cats.filter(c => !state.placed.includes(c.id));
+  const toSell = state.cats.filter(c => state.placed.indexOf(c.id) < 0);
   if (toSell.length === 0) { log('💤 Нечего продавать'); return; }
   let sum = 0;
   toSell.forEach(c => sum += c.rarity * 10 + c.power + c.resist + c.luck);
-  state.cats = state.cats.filter(c => state.placed.includes(c.id));
+  state.cats = state.cats.filter(c => state.placed.indexOf(c.id) >= 0);
   state.coins += sum;
   state.stats.totalCoinsEarned += sum;
   sfxWin();
-  log(`💰 Продано ${toSell.length} за ${sum} 🪙`, 'win');
+  log('💰 Продано ' + toSell.length + ' за ' + sum + ' 🪙', 'win');
   checkAchievements();
   saveGame(); renderAll();
 }
@@ -1802,54 +1779,63 @@ function checkDailyBonus() {
     state.lastDailyBonus = now;
     saveGame();
     setTimeout(() => {
-      toast(`🎁 Ежедневный бонус: +${bonus}🪙 +${boxesBonus}📦`);
-      log(`🎁 Ежедневный бонус! +${bonus}🪙 +${boxesBonus}📦`, 'epic');
+      toast('🎁 Ежедневный бонус: +' + bonus + '🪙 +' + boxesBonus + '📦');
+      log('🎁 Ежедневный бонус! +' + bonus + '🪙 +' + boxesBonus + '📦', 'epic');
     }, 500);
   }
 }
 
 // ============================================================
-//  КНОПКИ
+//  ЗАКРЫТИЕ МОДАЛОК — глобально через делегирование
 // ============================================================
-document.getElementById('btnSpin').onclick = doFight;
-document.getElementById('btnShop').onclick = () => { sfxClick(); openShop(); };
-document.getElementById('btnUpgrade').onclick = () => { sfxClick(); openUpgrade(); };
-document.getElementById('btnMixer').onclick = () => { sfxClick(); openMixer(); };
-document.getElementById('btnBoxes').onclick = openStockBoxes;
-document.getElementById('btnPvp').onclick = () => { sfxClick(); openPvp(); };
-document.getElementById('btnSkins').onclick = () => { sfxClick(); openSkins(); };
-document.getElementById('btnAchievements').onclick = () => { sfxClick(); openAchievements(); };
-document.getElementById('btnStats').onclick = () => { sfxClick(); openStats(); };
-document.getElementById('btnSettings').onclick = () => { sfxClick(); openSettings(); };
-document.getElementById('btnSell').onclick = sellUnplaced;
-document.getElementById('btnMix').onclick = doMix;
-document.getElementById('btnFeed').onclick = doFeed;
-document.getElementById('btnCloseMixer').onclick = () => closeModal('modalMixer');
-document.getElementById('btnCloseShop').onclick = () => closeModal('modalShop');
-document.getElementById('btnCloseUpgrade').onclick = () => closeModal('modalUpgrade');
-document.getElementById('btnCloseAch').onclick = () => closeModal('modalAchievements');
-document.getElementById('btnCloseStats').onclick = () => closeModal('modalStats');
-document.getElementById('btnCloseSkins').onclick = () => closeModal('modalSkins');
-document.getElementById('btnClosePvp').onclick = () => closeModal('modalPvp');
-document.getElementById('btnCloseSettings').onclick = () => closeModal('modalSettings');
-document.getElementById('btnCreatePvp').onclick = createPvpCode;
-document.getElementById('btnEnterPvp').onclick = enterPvpCode;
-document.getElementById('resetBtn').onclick = resetGame;
-
-document.addEventListener('keydown', e => {
-  if (e.key === 's' || e.key === 'ы') sellUnplaced();
-  if (e.key === 'Escape') {
-    ['modalMixer','modalShop','modalUpgrade','modalAchievements','modalStats','modalSkins','modalPvp','modalSettings'].forEach(closeModal);
+document.addEventListener('click', (e) => {
+  // Клик по встроенному крестику
+  const closeBtn = e.target.closest('.modal-close');
+  if (closeBtn) {
+    const id = closeBtn.dataset.close;
+    if (id) closeModal(id);
+    return;
+  }
+  // Клик по фону модалки (не по внутреннему блоку)
+  if (e.target.classList.contains('modal')) {
+    e.target.classList.remove('on');
   }
 });
+
+// ============================================================
+//  КНОПКИ — навешиваем ПОСЛЕ загрузки DOM
+// ============================================================
+function bindButtons() {
+  const safeBind = (id, fn) => {
+    const el = document.getElementById(id);
+    if (el) el.onclick = fn;
+    else console.warn('Нет кнопки:', id);
+  };
+  safeBind('btnSpin', doFight);
+  safeBind('btnShop', () => { sfxClick(); openShop(); });
+  safeBind('btnUpgrade', () => { sfxClick(); openUpgrade(); });
+  safeBind('btnMixer', () => { sfxClick(); openMixer(); });
+  safeBind('btnBoxes', openStockBoxes);
+  safeBind('btnPvp', () => { sfxClick(); openPvp(); });
+  safeBind('btnSkins', () => { sfxClick(); openSkins(); });
+  safeBind('btnAchievements', () => { sfxClick(); openAchievements(); });
+  safeBind('btnStats', () => { sfxClick(); openStats(); });
+  safeBind('btnSettings', () => { sfxClick(); openSettings(); });
+  safeBind('btnSell', sellUnplaced);
+  safeBind('btnMix', doMix);
+  safeBind('btnFeed', doFeed);
+  safeBind('btnCreatePvp', createPvpCode);
+  safeBind('btnEnterPvp', enterPvpCode);
+  safeBind('resetBtn', resetGame);
+}
 
 // ============================================================
 //  СТАРТ
 // ============================================================
 function init() {
   for (let i = 0; i < 3; i++) state.cats.push(makeCat(1));
-  state.thorns.push(makeThorn());
-  state.thorns.push(makeThorn());
+  state.thorns.push(makeThorn(false));
+  state.thorns.push(makeThorn(false));
   state.placed = [state.cats[0].id];
   log('🍑 Добро пожаловать!', 'boss');
   log('Тапни котика внизу — поставить на поле (макс 3).');
@@ -1858,21 +1844,38 @@ function init() {
   log('💾 Прогресс сохраняется автоматически');
   renderAll();
 }
-const loaded = loadGame();
-if (!loaded) init();
-else { log('💾 Прогресс загружен', 'win'); renderAll(); }
 
-checkDailyBonus();
+function boot() {
+  const loaded = loadGame();
+  if (!loaded) init();
+  else { log('💾 Прогресс загружен', 'win'); renderAll(); }
+  checkDailyBonus();
+  bindButtons();
 
-window.addEventListener('beforeunload', saveGame);
-document.addEventListener('visibilitychange', () => { if (document.hidden) saveGame(); });
-document.addEventListener('touchstart', () => { ac(); }, { once: true });
-document.addEventListener('click', () => { ac(); }, { once: true });
-
-if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW fail', e));
+  // Escape закрывает все модалки
+  document.addEventListener('keydown', e => {
+    if (e.key === 's' || e.key === 'ы') sellUnplaced();
+    if (e.key === 'Escape') {
+      ['modalMixer','modalShop','modalUpgrade','modalAchievements','modalStats','modalSkins','modalPvp','modalSettings'].forEach(closeModal);
+    }
   });
+
+  window.addEventListener('beforeunload', saveGame);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) saveGame(); });
+  document.addEventListener('touchstart', () => { ac(); }, { once: true });
+  document.addEventListener('click', () => { ac(); }, { once: true });
+
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW fail', e));
+    });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
 }
 </script>
 </body>
