@@ -1,4 +1,4 @@
-const CACHE = 'persiki-v1';
+const CACHE = 'persiki-v7';
 const ASSETS = [
   './',
   './index.html',
